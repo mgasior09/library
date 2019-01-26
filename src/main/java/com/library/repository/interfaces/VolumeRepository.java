@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface VolumeRepostiory extends JpaRepository <Volume, Integer> {
+public interface VolumeRepository extends JpaRepository <Volume, Integer> {
 
 
     Optional<Volume> findById (Integer volumeId);

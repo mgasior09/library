@@ -5,7 +5,6 @@ import com.library.repository.interfaces.BookRepository;
 import com.library.service.interfaces.BookService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,8 +25,5 @@ private  final BookRepository bookRepository;
         return bookRepository.findById(bookId);
     }
 
-    @Override
-    public List<Book> loadBooksThatCanBeRent() {
-        return null;
-    }
+
 }
