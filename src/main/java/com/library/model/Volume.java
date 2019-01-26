@@ -10,6 +10,15 @@ public class Volume {
     private boolean hardCover;
     private Date added;
     private Date modified;
+    private boolean rented;
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
+    }
 
     public Integer getId() {
         return id;

@@ -1,6 +1,9 @@
 package com.library.service.interfaces;
 
-public interface RentService {
+import com.library.model.Customer;
+import com.library.model.Rent;
 
+public interface RentService {
+    Rent rent(Integer bookId, Customer customer);
 
 }
