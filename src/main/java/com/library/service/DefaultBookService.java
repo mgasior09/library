@@ -8,6 +8,8 @@ import com.library.service.interfaces.AuthorService;
 import com.library.service.interfaces.BookService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,12 +34,18 @@ public class DefaultBookService implements BookService {
         } else {
             authorService.addAuthor(author);
         }
+        book.setAdded(new Date());
         return bookRepository.save(book);
     }
 
     @Override
     public Optional<Book> getById(Integer bookId) {
         return bookRepository.findById(bookId);
+    }
+
+    @Override
+    public List<Book> findAll() {
+        return bookRepository.findAll();
     }
 
 
