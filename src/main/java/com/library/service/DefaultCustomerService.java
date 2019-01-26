@@ -24,6 +24,21 @@ public class DefaultCustomerService implements CustomerService {
     @Override
     public Customer registerCustomer(Customer customer) {
         customer.setAdded(new Date());
+        String pesel = customer.getPesel();
+
+        String birthDate = "" + pesel.charAt(0) + pesel.charAt(1) +
+                "-" + pesel.charAt(2) + pesel.charAt(3) +
+                "-" + pesel.charAt(4) + pesel.charAt(5);
+
+        String sex;
+        if (Character.getNumericValue(pesel.charAt(9)) % 2 == 0 ) {
+            sex = "F";
+        } else {
+            sex = "M";
+        }
+
+        customer.setBirthDate(birthDate);
+        customer.setSex(sex);
         return customerRepository.save(customer);
     }
 }
