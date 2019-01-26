@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Comparator;
+import java.util.List;
 
 @Controller
 @RequestMapping("/customers")
@@ -22,10 +24,18 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    @GetMapping
+    public String printAllCustomers(Model model) {
+        List<Customer> customers = customerService.showCustomers();
+        customers.sort(Comparator.comparing(Customer::getId));
+        model.addAttribute("customersList", customers);
+        return "customers";
+    }
+
     @GetMapping("/register")
     public String initCustomerRegistrationForm(Model model) {
         model.addAttribute("registeredCustomer", new Customer());
-        return "registeredCustomer";
+        return "registerCustomer";
     }
 
     @PostMapping
@@ -33,8 +43,9 @@ public class CustomerController {
             @Valid @ModelAttribute("registeredCustomer") Customer customer,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-
+            return "registerCustomer";
         }
-        return null;
+        customerService.registerCustomer(customer);
+        return "redirect:/customers";
     }
 }
