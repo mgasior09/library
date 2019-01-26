@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+<body>
+<h1>Customers</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>Birth Date</th>
+        <th>City</th>
+        <th>Street</th>
+        <th>Zip Code</th>
+        <th>Added</th>
+        <th>Modified</th>
+    </tr>
+    <tr th:each="customer : ${vehicleList}" th:object="${customer}">
+        <td th:text="*{id}"/>
+        <td th:text="*{name}"/>
+        <td th:text="*{lastName}"/>
+        <td th:text="*{birthDate}"/>
+        <td th:text="*{city}"/>
+        <td th:text="*{street}"/>
+        <td th:text="*{zipCode}"/>
+        <td th:text="*{added}"/>
+        <td th:text="*{modiefied}"/>
+        <!--<td><a th:href="@{/vehicles/{vehId}/sell(vehId=*{id})}"-->
+               <!--th:text="Sell"/></td>-->
+    </tr>
+
+</table>
+
+</body>
+</html>
