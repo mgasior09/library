@@ -30,7 +30,7 @@
         <tr>
             <td>Date of Birth</td>
             <td>
-                <input type="text" th:field="*{birthDate}" th:errorclass="fieldError"/>
+                <input type="date" th:field="*{birthDate}" th:errorclass="fieldError"/>
                 <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"/>
             </td>
         </tr>
@@ -53,6 +53,31 @@
             <td>
                 <input type="text" th:field="*{zipCode}" th:errorclass="fieldError"/>
                 <span th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Pesel</td>
+            <td>
+                <input type="text" th:field="*{pesel}" th:errorclass="fieldError"/>
+                <span th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Sex</td>
+            <td>
+                <input type="text" list="sexes" th:field="*{sex}" th:errorclass="fieldError"/>
+                <datalist id="sexes">
+                    <option>F</option>
+                    <option>M</option>
+                </datalist>
+                <span th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                <input type="text" th:field="*{password}" th:errorclass="fieldError"/>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
             </td>
         </tr>
         <tr><td colspan="2"><input type="submit"/></td></tr>

@@ -1,6 +1,11 @@
 package com.library.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.xml.crypto.Data;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -11,15 +16,24 @@ public class Customer {
     private String name;
     @Column(name = "last_name")
     private String lastName;
-    private Date birthDate;
+    private String birthDate;
     private String pesel;
     private String city;
     private String street;
     @Column(name = "zip_code")
     private String zipCode;
+    private String sex;
     private Date added;
     private Date modified;
     private String password;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public Integer getId() {
         return id;
@@ -45,11 +59,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

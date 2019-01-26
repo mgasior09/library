@@ -5,6 +5,7 @@ package com.library.service;
         import com.library.service.interfaces.CustomerService;
         import org.springframework.stereotype.Service;
 
+        import java.util.Date;
         import java.util.List;
 
 @Service
@@ -22,6 +23,7 @@ public class DefaultCustomerService implements CustomerService {
 
     @Override
     public Customer registerCustomer(Customer customer) {
+        customer.setAdded(new Date());
         return customerRepository.save(customer);
     }
 }

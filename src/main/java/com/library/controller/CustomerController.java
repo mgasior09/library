@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -33,8 +34,8 @@ public class CustomerController {
     }
 
     @GetMapping("/add")
-    public String initCustomerRegistrationForm(Model model) {
-        model.addAttribute("registeredCustomer", new Customer());
+    public String initCustomerRegistrationForm(Model model, Customer customer) {
+        model.addAttribute("registeredCustomer", customer);
         return "addCustomer";
     }
 
@@ -43,7 +44,7 @@ public class CustomerController {
             @Valid @ModelAttribute("registeredCustomer") Customer customer,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "registerCustomer";
+            return "addCustomer";
         }
         customerService.registerCustomer(customer);
         return "redirect:/customers";
