@@ -15,7 +15,7 @@ public class Customer {
     @NotNull
     @Column(name = "last_name")
     private String lastName;
-    private Date birthDate;
+    private String birthDate;
     @NotNull
     private String pesel;
     private String city;
@@ -51,11 +51,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
