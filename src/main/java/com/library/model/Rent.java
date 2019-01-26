@@ -1,9 +1,6 @@
 package com.library.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -11,8 +8,12 @@ public class Rent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @ManyToOne
+    @JoinColumn(name="customer_id")
     private Customer customer;
     private Date rentDate;
+    @ManyToOne
+    @JoinColumn(name="volume_id")
     private Volume volume;
     private Date untilDate;
 

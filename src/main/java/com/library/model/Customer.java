@@ -1,9 +1,6 @@
 package com.library.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -12,11 +9,13 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @Column(name = "last_name")
     private String lastName;
     private Date birthDate;
     private String pesel;
     private String city;
     private String street;
+    @Column(name = "zip_code")
     private String zipCode;
     private Date added;
     private Date modified;

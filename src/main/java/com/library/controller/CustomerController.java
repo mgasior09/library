@@ -32,10 +32,10 @@ public class CustomerController {
         return "customers";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/add")
     public String initCustomerRegistrationForm(Model model) {
         model.addAttribute("registeredCustomer", new Customer());
-        return "registerCustomer";
+        return "addCustomer";
     }
 
     @PostMapping

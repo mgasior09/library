@@ -1,10 +1,7 @@
 package com.library.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -16,6 +13,8 @@ public class Book {
     private String isbn;
     private Date added;
     private Date modified;
+    @ManyToOne
+    @JoinColumn(name="author_id")
     private Author author;
     private String publishing;
 

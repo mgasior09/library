@@ -18,7 +18,7 @@
         <th>Added</th>
         <th>Modified</th>
     </tr>
-    <tr th:each="customer : ${vehicleList}" th:object="${customer}">
+    <tr th:each="customer : ${customersList}" th:object="${customer}">
         <td th:text="*{id}"/>
         <td th:text="*{name}"/>
         <td th:text="*{lastName}"/>
@@ -27,11 +27,11 @@
         <td th:text="*{street}"/>
         <td th:text="*{zipCode}"/>
         <td th:text="*{added}"/>
-        <td th:text="*{modiefied}"/>
-        <!--<td><a th:href="@{/vehicles/{vehId}/sell(vehId=*{id})}"-->
-               <!--th:text="Sell"/></td>-->
-    </tr>
+        <td th:text="*{modified}"/>
 
+    </tr>
+    <!--<td><a th:href="@{/customers/add}"-->
+           <!--th:text="Add new customer"/></td>-->
 </table>
 
 </body>
