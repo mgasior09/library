@@ -13,7 +13,7 @@ public class Release {
     private Date added;
     private Date modified;
     @ManyToOne
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name="book_id")
     private Book book;
 
 

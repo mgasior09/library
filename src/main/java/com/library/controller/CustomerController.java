@@ -32,10 +32,10 @@ public class CustomerController {
         return "customers";
     }
 
-    @GetMapping("/register")
-    public String initCustomerRegistrationForm(Model model) {
-        model.addAttribute("registeredCustomer", new Customer());
-        return "registerCustomer";
+    @GetMapping("/add")
+    public String initCustomerRegistrationForm(Model model, Customer customer) {
+        model.addAttribute("registeredCustomer", customer);
+        return "addCustomer";
     }
 
     @PostMapping
@@ -43,9 +43,16 @@ public class CustomerController {
             @Valid @ModelAttribute("registeredCustomer") Customer customer,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "registerCustomer";
+            return "addCustomer";
         }
-        customerService.registerCustomer(customer);
+
+        try {
+            customerService.registerCustomer(customer);
+            customerService.addCustomerToUserDatabase(customer);
+        } catch (StringIndexOutOfBoundsException e) {
+            return "redirect:/customers/add";
+        }
+
         return "redirect:/customers";
     }
 }

@@ -15,10 +15,12 @@
         <th>City</th>
         <th>Street</th>
         <th>Zip Code</th>
+        <th>Pesel</th>
+        <th>Sex</th>
         <th>Added</th>
         <th>Modified</th>
     </tr>
-    <tr th:each="customer : ${vehicleList}" th:object="${customer}">
+    <tr th:each="customer : ${customersList}" th:object="${customer}">
         <td th:text="*{id}"/>
         <td th:text="*{name}"/>
         <td th:text="*{lastName}"/>
@@ -26,13 +28,13 @@
         <td th:text="*{city}"/>
         <td th:text="*{street}"/>
         <td th:text="*{zipCode}"/>
+        <td th:text="*{pesel}"/>
+        <td th:text="*{sex}"/>
         <td th:text="*{added}"/>
         <td th:text="*{modified}"/>
-        <!--<td><a th:href="@{/vehicles/{vehId}/sell(vehId=*{id})}"-->
-               <!--th:text="Sell"/></td>-->
     </tr>
-
 </table>
-
+<!--<td><a th:href="@{/customers/add}"-->
+       <!--th:text="Add book lover"/></td>-->
 </body>
 </html>

@@ -20,4 +20,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     void deleteById(Integer id);
 
+    List<Book> findAll();
+
 }

@@ -13,7 +13,7 @@ public class Rent {
     private Customer customer;
     private Date rentDate;
     @ManyToOne
-    @JoinColumn(name = "volume_id")
+    @JoinColumn(name="volume_id")
     private Volume volume;
     private Date untilDate;
 
