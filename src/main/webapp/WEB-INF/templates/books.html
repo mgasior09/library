@@ -13,7 +13,7 @@
         <th>Title</th>
         <th>Author's name</th>
         <th>Author's last name</th>
-        <th>Publishing</th>
+        <th>Publishing house</th>
         <th>ISBN</th>
         <th>Added</th>
         <th>Modified</th>
@@ -25,11 +25,14 @@
         <td th:text="*{title}"/>
         <td th:text="*{author.name}"/>
         <td th:text="*{author.lastName}"/>
-        <td th:text="*{publishing}"/>
+        <td th:text="*{publisher}"/>
         <td th:text="*{isbn}"/>
         <td th:text="*{added}"/>
         <td th:text="*{modified}"/>
-
+        <td><a th:href="@{/books/edit/{bookId}(bookId=*{id})}"
+               th:text="Edit"/></td>
+        <td><a th:href="@{/books/delete/{bookId}(bookId=*{id})}"
+               th:text="Delete"/></td>
     </tr>
 
 </table>

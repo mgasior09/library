@@ -74,7 +74,7 @@ public class DefaultBookService implements BookService {
         return bookRepository.findByAuthor(author);
     }
 
-    public List<Book> findByPublishing(String publishing) {
-        return bookRepository.findByPublishing(publishing);
+    public List<Book> findByPublisher(String publisher) {
+        return bookRepository.findByPublisher(publisher);
     }
 }

@@ -20,17 +20,17 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
-    private String publishing;
+    private String publisher;
 
 
-
-    public String getPublishing() {
-        return publishing;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
-    public void setPublishing(String publishing) {
-        this.publishing = publishing;
+    public String getPublisher() {
+        return publisher;
     }
+
 
     public Integer getId() {
         return id;
