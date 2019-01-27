@@ -46,8 +46,8 @@ public class WorkerController {
             return "addWorker";
         }
         workerService.registerWorker(worker);
+        workerService.addRoleToUser(workerService.addWorkerToUserDatabase(worker));
         workerService.addWorkerToUserDatabase(worker);
-
         return "redirect:/workers";
     }
 }

@@ -7,6 +7,5 @@ import java.util.Optional;
 
 public interface VolumeRepository extends JpaRepository <Volume, Integer> {
 
-
     Optional<Volume> findById (Integer volumeId);
 }
