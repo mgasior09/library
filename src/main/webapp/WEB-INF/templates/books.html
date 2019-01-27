@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +18,7 @@
         <th>Added</th>
         <th>Modified</th>
         <th>Edit</th>
-
+        <th>Delete</th>
     </tr>
     <tr th:each="book : ${booksList}" th:object="${book}">
         <td th:text="*{id}"/>

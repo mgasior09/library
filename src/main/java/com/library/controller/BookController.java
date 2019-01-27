@@ -1,6 +1,7 @@
 package com.library.controller;
 
 import com.library.model.Book;
+import com.library.repository.interfaces.BookRepository;
 import com.library.service.interfaces.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +17,11 @@ import java.util.Optional;
 @RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
+    private final BookRepository bookRepository;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, BookRepository bookRepository) {
         this.bookService = bookService;
-    }
-
-    @PostMapping("/{id}/edit")
-    public String editBook(@PathVariable("id") Integer bookId) {
-        Optional<Book> optionalBook = bookService.getById(bookId);
-        if (optionalBook.isPresent()) {
-            Book book = optionalBook.get();
-
-        }
-        return "books";
+        this.bookRepository = bookRepository;
     }
 
     @GetMapping("/add")
@@ -37,19 +30,28 @@ public class BookController {
         return "addBook";
     }
 
-    @GetMapping("/{id}/edit")
-    public String initBookEditForm(@PathVariable("id")Integer bookId, Model model) {
-        Optional<Book> foundBook = bookService.getById(bookId);
-        foundBook.ifPresent(book -> model.addAttribute("editBook", book));
-        return "editBook";
-    }
-
     @PostMapping
-    public String saveBook(@Valid @ModelAttribute("addedBook") Book book, BindingResult br) {
+    public String addBook(@Valid @ModelAttribute("addedBook") Book book, BindingResult br) {
         if (br.hasErrors()) {
             return "addBook";
         }
         bookService.addBook(book);
+        return "redirect:/books";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String initBookEditForm(@PathVariable("id") Integer bookId, Model model) {
+        Optional<Book> foundBook = bookService.getById(bookId);
+        foundBook.ifPresent(book -> model.addAttribute("newBookTitle", book.getTitle()));
+        foundBook.ifPresent(book -> model.addAttribute("editBook", book));
+        return "editBook";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editBook(@PathVariable("id") Integer bookId, @RequestParam String title) {
+        Book book = bookRepository.getOne(bookId);
+        book.setTitle(title);
+        bookRepository.save(book);
         return "redirect:/books";
     }
 
@@ -59,5 +61,12 @@ public class BookController {
         bookList.sort(Comparator.comparing(Book::getId));
         model.addAttribute("booksList", bookList);
         return "books";
+    }
+
+
+    @GetMapping("delete/{id}")
+    public String deleteById(@PathVariable("id") Integer bookId, Model model) {
+      bookService.deleteById(bookId);
+        return "redirect:/books";
     }
 }
