@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class User extends BaseModel {
+    public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String username;
     private String password;
     private Boolean active;
