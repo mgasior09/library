@@ -3,6 +3,7 @@ package com.library.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.crypto.Data;
 import java.sql.Time;
@@ -24,6 +25,7 @@ public class Customer {
     private String lastName;
     private String birthDate;
     @NotNull
+    @Pattern(regexp = "^\\d+$")
     private String pesel;
     private String city;
     private String street;

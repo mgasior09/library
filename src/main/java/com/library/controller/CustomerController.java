@@ -45,7 +45,13 @@ public class CustomerController {
         if (bindingResult.hasErrors()) {
             return "addCustomer";
         }
-        customerService.registerCustomer(customer);
+
+        try {
+            customerService.registerCustomer(customer);
+        } catch (StringIndexOutOfBoundsException e) {
+            return "redirect:/customers/add";
+        }
+
         return "redirect:/customers";
     }
 }
