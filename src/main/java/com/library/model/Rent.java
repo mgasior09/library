@@ -9,7 +9,7 @@ public class Rent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
-    @JoinColumn(name="customer_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
     private Date rentDate;
     @ManyToOne

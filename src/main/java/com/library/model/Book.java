@@ -2,6 +2,7 @@ package com.library.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -9,12 +10,15 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
     private String title;
+    @NotNull
     private String isbn;
+
     private Date added;
     private Date modified;
     @ManyToOne
-    @JoinColumn(name="author_id")
+    @JoinColumn(name = "author_id")
     private Author author;
     private String publishing;
 

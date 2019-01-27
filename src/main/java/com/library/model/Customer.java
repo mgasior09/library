@@ -6,6 +6,9 @@ import javax.persistence.*;
 import javax.xml.crypto.Data;
 import java.sql.Time;
 import java.sql.Timestamp;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -13,10 +16,13 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
     private String name;
+    @NotNull
     @Column(name = "last_name")
     private String lastName;
     private String birthDate;
+    @NotNull
     private String pesel;
     private String city;
     private String street;
@@ -25,6 +31,8 @@ public class Customer {
     private String sex;
     private Date added;
     private Date modified;
+    @NotNull
+    @Min(6)
     private String password;
 
     public String getSex() {
