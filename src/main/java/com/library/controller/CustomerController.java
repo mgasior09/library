@@ -48,6 +48,7 @@ public class CustomerController {
 
         try {
             customerService.registerCustomer(customer);
+            customerService.addCustomerToUserDatabase(customer);
         } catch (StringIndexOutOfBoundsException e) {
             return "redirect:/customers/add";
         }

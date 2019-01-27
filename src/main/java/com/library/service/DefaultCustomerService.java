@@ -1,7 +1,9 @@
 package com.library.service;
 
         import com.library.model.Customer;
+        import com.library.model.User;
         import com.library.repository.interfaces.CustomerRepository;
+        import com.library.repository.interfaces.UserRepository;
         import com.library.service.interfaces.CustomerService;
         import org.springframework.stereotype.Service;
 
@@ -11,11 +13,13 @@ package com.library.service;
 @Service
 public class DefaultCustomerService implements CustomerService {
     private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
 
-    public DefaultCustomerService(CustomerRepository customerRepository) {
+    public DefaultCustomerService(CustomerRepository customerRepository, UserRepository userRepository) {
         this.customerRepository = customerRepository;
 
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -60,5 +64,14 @@ public class DefaultCustomerService implements CustomerService {
         customer.setBirthDate(birthDate);
         customer.setSex(sex);
         return customerRepository.save(customer);
+    }
+
+    @Override
+    public User addCustomerToUserDatabase(Customer customer) {
+        User user = new User();
+        user.setUsername(customer.getPesel());
+        user.setPassword(customer.getPassword());
+        user.setActive(true);
+        return userRepository.save(user);
     }
 }
