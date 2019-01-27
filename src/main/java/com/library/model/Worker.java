@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -14,6 +16,9 @@ public class Worker {
     private String login;
     private Date added;
     private Date modified;
+    @NotNull
+    @Min(6)
+    private String password;
 
     public Integer getId() {
         return id;
@@ -45,5 +50,13 @@ public class Worker {
 
     public void setModified(Date modified) {
         this.modified = modified;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
