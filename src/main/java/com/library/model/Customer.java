@@ -3,6 +3,7 @@ package com.library.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import javax.xml.crypto.Data;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -32,7 +33,7 @@ public class Customer {
     private Date added;
     private Date modified;
     @NotNull
-    @Min(6)
+    @Size(min = 6, max = 150)
     private String password;
 
     public String getSex() {
