@@ -9,6 +9,7 @@ package com.library.service;
         import com.library.repository.interfaces.UserRoleRepository;
         import com.library.service.interfaces.CustomerService;
         import org.springframework.stereotype.Service;
+        import org.springframework.transaction.annotation.Transactional;
 
         import java.util.Date;
         import java.util.List;
@@ -89,6 +90,7 @@ public class DefaultCustomerService implements CustomerService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer id) {
         Optional<Customer> foundCustomer = customerRepository.findById(id);
         if (foundCustomer.isPresent()) {

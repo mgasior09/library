@@ -18,7 +18,14 @@
         <td th:text="*{login}"/>
         <td th:text="*{added}"/>
         <td th:text="*{modified}"/>
+        <td><a th:href="@{/workers/edit/{workerId}(workerId=*{id})}"
+               th:text="Edit"/></td>
+        <td><a th:href="@{/workers/delete/{workerId}(workerId=*{id})}"
+               th:text="Delete"/></td>
     </tr>
 </table>
+<form action="/workers/add">
+    <input type="submit" value="Add new worker">
+</form>
 </body>
 </html>

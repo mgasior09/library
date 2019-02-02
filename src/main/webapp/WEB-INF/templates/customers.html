@@ -32,9 +32,14 @@
         <td th:text="*{sex}"/>
         <td th:text="*{added}"/>
         <td th:text="*{modified}"/>
+        <td><a th:href="@{/customers/edit/{customerId}(customerId=*{id})}"
+               th:text="Edit"/></td>
+        <td><a th:href="@{/customers/delete/{customerId}(customerId=*{id})}"
+               th:text="Delete"/></td>
     </tr>
 </table>
-<!--<td><a th:href="@{/customers/add}"-->
-<!--th:text="Add book lover"/></td>-->
+<form action="/customers/add">
+    <input type="submit" value="Add new customer">
+</form>
 </body>
 </html>
