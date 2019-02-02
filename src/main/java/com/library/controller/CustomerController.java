@@ -5,10 +5,7 @@ import com.library.service.interfaces.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Comparator;
@@ -48,11 +45,18 @@ public class CustomerController {
 
         try {
             customerService.registerCustomer(customer);
-            customerService.addCustomerToUserDatabase(customer);
+            customerService.addRoleToCustomer(customerService.addCustomerToUserDatabase(customer));
         } catch (StringIndexOutOfBoundsException e) {
             return "redirect:/customers/add";
         }
 
         return "redirect:/customers";
     }
+
+    @GetMapping("delete/{id}")
+    public String deleteById(@PathVariable("id") Integer customerID, Model model) {
+        customerService.deleteById(customerID);
+        return "redirect:/customers";
+    }
+
 }

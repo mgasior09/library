@@ -1,5 +1,6 @@
 package com.library.model;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,6 +15,11 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
+@Table(
+        name = "CUSTOMER",
+        uniqueConstraints =
+                @UniqueConstraint(columnNames = {"pesel"})
+)
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

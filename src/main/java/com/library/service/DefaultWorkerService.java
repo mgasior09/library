@@ -6,12 +6,13 @@ import com.library.model.Worker;
 import com.library.repository.interfaces.UserRepository;
 import com.library.repository.interfaces.UserRoleRepository;
 import com.library.repository.interfaces.WorkerRepository;
-import com.library.service.interfaces.UserRoleService;
 import com.library.service.interfaces.WorkerService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultWorkerService implements WorkerService{
@@ -45,10 +46,22 @@ public class DefaultWorkerService implements WorkerService{
     }
 
     @Override
-    public UserRole addRoleToUser(User user) {
+    public UserRole addRoleToWorker(User user) {
         UserRole userRole = new UserRole();
         userRole.setUser(user);
         userRole.setRoleName("ROLE_WORKER");
         return userRoleRepository.save(userRole);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        Optional<Worker> foundWorker = workerRepository.findById(id);
+        if (foundWorker.isPresent()) {
+            String login = foundWorker.get().getLogin();
+            userRepository.deleteByUsername(login);
+        }
+
+        workerRepository.deleteById(id);
     }
 }

@@ -2,12 +2,13 @@ package com.library.model;
 
 import javax.persistence.*;
 
+@Entity
 public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String roleName;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="userID")
     private User user;
 
