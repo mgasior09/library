@@ -21,5 +21,5 @@ public interface BookService {
 
     List<Book> findByAuthor(Author author);
 
-    List<Book> findByPublishing(String publishing);
+    List<Book> findByPublisher(String publisher);
 }

@@ -12,6 +12,7 @@ public interface WorkerService {
     Worker registerWorker(Worker worker);
     User addWorkerToUserDatabase(Worker worker);
     UserRole addRoleToWorker(User user);
-
+    void editPassword(Integer id);
+    Optional<Worker> getById(Integer workerId);
     void deleteById(Integer id);
 }

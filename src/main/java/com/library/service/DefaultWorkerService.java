@@ -54,6 +54,24 @@ public class DefaultWorkerService implements WorkerService{
     }
 
     @Override
+    public void editPassword(Integer workerId) {
+        Worker worker = workerRepository.findById(workerId).get();
+        String login = worker.getLogin();
+        String password = worker.getPassword();
+        User user = userRepository.findByUsername(login).get();
+        user.setPassword(password);
+        userRepository.save(user);
+        worker.setModified(new Date());
+        workerRepository.save(worker);
+    }
+
+    @Override
+    public Optional<Worker> getById(Integer workerId) {
+        return workerRepository.findById(workerId);
+    }
+
+
+    @Override
     @Transactional
     public void deleteById(Integer id) {
         Optional<Worker> foundWorker = workerRepository.findById(id);
@@ -61,7 +79,6 @@ public class DefaultWorkerService implements WorkerService{
             String login = foundWorker.get().getLogin();
             userRepository.deleteByUsername(login);
         }
-
         workerRepository.deleteById(id);
     }
 }

@@ -26,7 +26,6 @@ public class DefaultBookService implements BookService {
 
     @Override
     public Book addBook(Book book) {
-
         AuthorService authorService = new DefaultAuthorService(authorRepository);
         Author author = book.getAuthor();
         Optional<Author> optionalAuthor = authorRepository.findByNameAndLastName(author.getName(), author.getLastName());
@@ -41,7 +40,7 @@ public class DefaultBookService implements BookService {
 
     @Override
     public void editBook(Integer bookId) {
-        Book book = bookRepository.getOne(bookId);
+        Book book = bookRepository.findById(bookId).get();
         book.setModified(new Date());
         bookRepository.save(book);
     }
@@ -50,8 +49,6 @@ public class DefaultBookService implements BookService {
     public void deleteById(Integer id) {
         bookRepository.deleteById(id);
     }
-
-
     @Override
     public Optional<Book> getById(Integer bookId) {
         return bookRepository.findById(bookId);
@@ -74,7 +71,7 @@ public class DefaultBookService implements BookService {
         return bookRepository.findByAuthor(author);
     }
 
-    public List<Book> findByPublishing(String publishing) {
-        return bookRepository.findByPublishing(publishing);
+    public List<Book> findByPublisher(String publisher) {
+        return bookRepository.findByPublisher(publisher);
     }
 }

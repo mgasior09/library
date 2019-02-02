@@ -42,16 +42,13 @@ public class BookController {
     @GetMapping("/edit/{id}")
     public String initBookEditForm(@PathVariable("id") Integer bookId, Model model) {
         Optional<Book> foundBook = bookService.getById(bookId);
-        foundBook.ifPresent(book -> model.addAttribute("newBookTitle", book.getTitle()));
         foundBook.ifPresent(book -> model.addAttribute("editBook", book));
         return "editBook";
     }
 
-    @PostMapping("/edit/{id}")
-    public String editBook(@PathVariable("id") Integer bookId, @RequestParam String title) {
-        Book book = bookRepository.getOne(bookId);
-        book.setTitle(title);
-        bookRepository.save(book);
+    @PostMapping("/edit")
+    public String editBook(@ModelAttribute Book book) {
+        bookService.editBook(book.getId());
         return "redirect:/books";
     }
 
@@ -63,10 +60,9 @@ public class BookController {
         return "books";
     }
 
-
     @GetMapping("delete/{id}")
     public String deleteById(@PathVariable("id") Integer bookId, Model model) {
-      bookService.deleteById(bookId);
+        bookService.deleteById(bookId);
         return "redirect:/books";
     }
 }
