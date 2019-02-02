@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/customers")
@@ -53,10 +54,22 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    @GetMapping("delete/{id}")
-    public String deleteById(@PathVariable("id") Integer customerID) {
-        customerService.deleteById(customerID);
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable("id") Integer customerId) {
+        customerService.deleteById(customerId);
         return "redirect:/customers";
     }
 
+    @GetMapping("/edit/{id}")
+    public String initCustomerEditForm(@PathVariable("id") Integer customerId, Model model) {
+        Optional<Customer> foundCustomer = customerService.getById(customerId);
+        foundCustomer.ifPresent(customer -> model.addAttribute("editedCustomer", customer));
+        return "editCustomer";
+    }
+
+    @PostMapping("/edit")
+    public String editCustomer(@ModelAttribute("editedCustomer") Customer customer) {
+        customerService.editCustomer(customer.getId(), customer);
+        return "redirect:/customers";
+    }
 }

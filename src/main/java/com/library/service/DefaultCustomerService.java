@@ -99,5 +99,29 @@ public class DefaultCustomerService implements CustomerService {
         customerRepository.deleteById(id);
     }
 
+    @Override
+    public void editCustomer(Integer id, Customer customer) {
+        Customer oldCustomer = customerRepository.findById(id).get();
+        oldCustomer.setCity(customer.getCity());
+        oldCustomer.setLastName(customer.getLastName());
+        oldCustomer.setName(customer.getName());
+        oldCustomer.setStreet(customer.getStreet());
+        oldCustomer.setZipCode(customer.getZipCode());
+
+        String password = customer.getPassword();
+        String pesel = oldCustomer.getPesel();
+        User user = userRepository.findByUsername(pesel).get();
+        user.setPassword(password);
+        oldCustomer.setPassword(password);
+        oldCustomer.setModified(new Date());
+        userRepository.save(user);
+        customerRepository.save(oldCustomer);
+    }
+
+    @Override
+    public Optional<Customer> getById(Integer workerId) {
+        return customerRepository.findById(workerId);
+    }
+
 
 }
