@@ -1,11 +1,14 @@
 package com.library.model;
 
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
+@Table(name = "book", uniqueConstraints = @UniqueConstraint(columnNames = "isbn"))
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +17,9 @@ public class Book {
     private String title;
     @NotNull
     private String isbn;
-
     private Date added;
     private Date modified;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "author_id")
     private Author author;
     private String publisher;

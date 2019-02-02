@@ -40,7 +40,7 @@ public class DefaultBookService implements BookService {
 
     @Override
     public void editBook(Integer bookId) {
-        Book book = bookRepository.getOne(bookId);
+        Book book = bookRepository.findById(bookId).get();
         book.setModified(new Date());
         bookRepository.save(book);
     }
@@ -49,8 +49,7 @@ public class DefaultBookService implements BookService {
     public void deleteById(Integer id) {
         bookRepository.deleteById(id);
     }
-
-    @Override
+   @Override
     public Optional<Book> getById(Integer bookId) {
         return bookRepository.findById(bookId);
     }

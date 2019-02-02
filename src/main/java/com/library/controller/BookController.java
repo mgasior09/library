@@ -46,11 +46,9 @@ public class BookController {
         return "editBook";
     }
 
-    @PostMapping("/edit/{id}")
-    public String editBook(@PathVariable("id") Integer bookId, @RequestParam String title) {
-        Book book = bookRepository.getOne(bookId);
-        book.setTitle(title);
-        bookRepository.save(book);
+    @PostMapping("/edit")
+    public String editBook(@ModelAttribute Book book) {
+        bookService.editBook(book.getId());
         return "redirect:/books";
     }
 
@@ -61,7 +59,6 @@ public class BookController {
         model.addAttribute("booksList", bookList);
         return "books";
     }
-
 
     @GetMapping("delete/{id}")
     public String deleteById(@PathVariable("id") Integer bookId, Model model) {

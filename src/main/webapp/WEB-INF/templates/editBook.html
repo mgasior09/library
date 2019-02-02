@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Edit book details</h1>
-<form th:action="@{/books/edit/{id}}" method="post" th:object="${editBook}">
+<form th:action="@{/books/edit}" method="post" th:object="${editBook}">
     <input type="hidden" th:field="*{id}" th:attr="name='bookId'">
     <table>
         <tr>
