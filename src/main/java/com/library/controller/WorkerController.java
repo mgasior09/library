@@ -57,13 +57,14 @@ public class WorkerController {
     @GetMapping("/edit/{id}")
     public String initWorkerEditForm(@PathVariable("id") Integer workerId, Model model) {
         Optional<Worker> foundWorker = workerService.getById(workerId);
-        foundWorker.ifPresent(worker -> model.addAttribute("editWorker", worker));
+        foundWorker.ifPresent(worker -> model.addAttribute("editedWorker", worker));
         return "editWorker";
     }
 
     @PostMapping("/edit")
-    public String editWorker(@ModelAttribute Worker worker) {
-        workerService.editPassword(worker.getId());
+    public String editWorker(@ModelAttribute("editedWorker") Worker worker,
+                             @ModelAttribute("password") String password) {
+        workerService.editPassword(worker.getId(), password);
         return "redirect:/workers";
     }
 }

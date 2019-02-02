@@ -54,13 +54,13 @@ public class DefaultWorkerService implements WorkerService{
     }
 
     @Override
-    public void editPassword(Integer workerId) {
+    public void editPassword(Integer workerId, String password) {
         Worker worker = workerRepository.findById(workerId).get();
         String login = worker.getLogin();
-        String password = worker.getPassword();
         User user = userRepository.findByUsername(login).get();
         user.setPassword(password);
         userRepository.save(user);
+        worker.setPassword(password);
         worker.setModified(new Date());
         workerRepository.save(worker);
     }
