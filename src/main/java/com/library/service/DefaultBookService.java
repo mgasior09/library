@@ -26,7 +26,6 @@ public class DefaultBookService implements BookService {
 
     @Override
     public Book addBook(Book book) {
-
         AuthorService authorService = new DefaultAuthorService(authorRepository);
         Author author = book.getAuthor();
         Optional<Author> optionalAuthor = authorRepository.findByNameAndLastName(author.getName(), author.getLastName());
@@ -50,7 +49,6 @@ public class DefaultBookService implements BookService {
     public void deleteById(Integer id) {
         bookRepository.deleteById(id);
     }
-
 
     @Override
     public Optional<Book> getById(Integer bookId) {

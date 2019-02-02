@@ -42,7 +42,6 @@ public class BookController {
     @GetMapping("/edit/{id}")
     public String initBookEditForm(@PathVariable("id") Integer bookId, Model model) {
         Optional<Book> foundBook = bookService.getById(bookId);
-        foundBook.ifPresent(book -> model.addAttribute("newBookTitle", book.getTitle()));
         foundBook.ifPresent(book -> model.addAttribute("editBook", book));
         return "editBook";
     }
