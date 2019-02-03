@@ -20,6 +20,11 @@ public class SearchController {
         this.bookService = bookService;
     }
 
+    @GetMapping("/go")
+    public String printSearch(Model model) {
+        return "search";
+    }
+
     @GetMapping
     public String printStartPage(Model model, Principal principal) {
         String userName = principal.getName();
