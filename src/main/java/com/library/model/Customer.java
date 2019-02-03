@@ -33,7 +33,9 @@ public class Customer {
     @NotNull
     @Pattern(regexp = "^\\d+$")
     private String pesel;
+    @NotNull
     private String city;
+    @NotNull
     private String street;
     @Column(name = "zip_code")
     private String zipCode;

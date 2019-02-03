@@ -6,38 +6,40 @@
     <title>Books</title>
 </head>
 <body>
-<h1>Books</h1>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Author's name</th>
-        <th>Author's last name</th>
-        <th>Publishing house</th>
-        <th>ISBN</th>
-        <th>Added</th>
-        <th>Modified</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <tr th:each="book : ${booksList}" th:object="${book}">
-        <td th:text="*{id}"/>
-        <td th:text="*{title}"/>
-        <td th:text="*{author.name}"/>
-        <td th:text="*{author.lastName}"/>
-        <td th:text="*{publisher}"/>
-        <td th:text="*{isbn}"/>
-        <td th:text="*{added}"/>
-        <td th:text="*{modified}"/>
-        <td><a th:href="@{/books/edit/{bookId}(bookId=*{id})}"
-               th:text="Edit"/></td>
-        <td><a th:href="@{/books/delete/{bookId}(bookId=*{id})}"
-               th:text="Delete"/></td>
-    </tr>
+<div align="center">
+    <h1>Books</h1>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author's name</th>
+            <th>Author's last name</th>
+            <th>Publishing house</th>
+            <th>ISBN</th>
+            <th>Added</th>
+            <th>Modified</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="book : ${booksList}" th:object="${book}">
+            <td th:text="*{id}"/>
+            <td th:text="*{title}"/>
+            <td th:text="*{author.name}"/>
+            <td th:text="*{author.lastName}"/>
+            <td th:text="*{publisher}"/>
+            <td th:text="*{isbn}"/>
+            <td th:text="*{added}"/>
+            <td th:text="*{modified}"/>
+            <td><a th:href="@{/books/edit/{bookId}(bookId=*{id})}"
+                   th:text="Edit"/></td>
+            <td><a th:href="@{/books/delete/{bookId}(bookId=*{id})}"
+                   th:text="Delete"/></td>
+        </tr>
 
-</table>
-<form action="/books/add">
-    <input type="submit" value="Add new book">
-</form>
+    </table>
+    <form action="/books/add">
+        <input type="submit" value="Add new book">
+    </form>
+</div>
 </body>
 </html>

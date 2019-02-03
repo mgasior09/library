@@ -4,34 +4,39 @@
     <meta charset="UTF-8">
     <title>Add Worker</title>
     <style>
-        .fieldError{
+        .fieldError {
             border-color: #ff0000;
         }
     </style>
 </head>
 <body>
-<h1>Add Worker</h1>
-<form action="#" th:action="@{/workers}" th:object="${registeredWorker}" method="post" >
-    <table>
-        <tr>
-            <td>Login</td>
-            <td>
-                <input type="text" th:field="*{login}" th:errorclass="fieldError"/>
-                <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td>
-                <input type="text" th:field="*{password}" th:errorclass="fieldError"/>
-                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
-            </td>
-        </tr>
-        <tr><td colspan="2"><input type="submit"/></td></tr>
-    </table>
-</form><br/>
-<form action="/workers">
-    <input type="submit" value="Return to workers">
-</form>
+<div align="center">
+    <h1>Add Worker</h1>
+    <form action="#" th:action="@{/workers}" th:object="${registeredWorker}" method="post">
+        <table>
+            <tr>
+                <td>Login</td>
+                <td>
+                    <input type="text" th:field="*{login}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <input type="text" th:field="*{password}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
+                </td>
+            </tr>
+            <td colspan="2" align="center"><input type="submit"/></td>
+            </tr>
+
+        </table>
+    </form>
+    <br/>
+    <form action="/workers">
+        <input type="submit" value="Return to workers">
+    </form>
+</div>
 </body>
 </html>

@@ -4,69 +4,74 @@
     <meta charset="UTF-8">
     <title>Add Customer</title>
     <style>
-        .fieldError{
+        .fieldError {
             border-color: #ff0000;
         }
     </style>
 </head>
 <body>
-<h1>Add Customer</h1>
-<form action="#" th:action="@{/customers}" th:object="${registeredCustomer}" method="post" >
-    <table>
-        <tr>
-            <td>First Name</td>
-            <td>
-                <input type="text" th:field="*{name}" th:errorclass="fieldError"/>
-                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Last Name</td>
-            <td>
-                <input type="text" th:field="*{lastName}" th:errorclass="fieldError"/>
-                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>City</td>
-            <td>
-                <input type="text" th:field="*{city}" th:errorclass="fieldError"/>
-                <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Street</td>
-            <td>
-                <input type="text" th:field="*{street}" th:errorclass="fieldError"/>
-                <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Zip Code</td>
-            <td>
-                <input type="text" th:field="*{zipCode}" th:errorclass="fieldError"/>
-                <span th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Pesel</td>
-            <td>
-                <input type="text" th:field="*{pesel}" th:errorclass="fieldError"/>
-                <span th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td>
-                <input type="text" th:field="*{password}" th:errorclass="fieldError"/>
-                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
-            </td>
-        </tr>
-        <tr><td colspan="2"><input type="submit"/></td></tr>
-    </table>
-</form><br/>
-<form action="/customers">
-    <input type="submit" value="Return to customers">
-</form>
+<div align="center">
+    <h1>Add Customer</h1>
+    <form action="#" th:action="@{/customers}" th:object="${registeredCustomer}" method="post">
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td>
+                    <input type="text" th:field="*{name}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>
+                    <input type="text" th:field="*{lastName}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td>
+                    <input type="text" th:field="*{city}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Street</td>
+                <td>
+                    <input type="text" th:field="*{street}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Zip Code</td>
+                <td>
+                    <input type="text" th:field="*{zipCode}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Pesel</td>
+                <td>
+                    <input type="text" th:field="*{pesel}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <input type="text" th:field="*{password}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit"/></td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+    <form action="/customers">
+        <input type="submit" value="Return to customers">
+    </form>
+</div>
 </body>
 </html>

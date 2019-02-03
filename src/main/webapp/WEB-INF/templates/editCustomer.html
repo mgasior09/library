@@ -5,55 +5,58 @@
     <title>Edit customer</title>
 </head>
 <body>
-<h1>Edit customer details</h1>
-<form th:action="@{/customers/edit}" method="post" th:object="${editedCustomer}">
-    <input type="hidden" th:field="*{id}" th:attr="name='customerId'">
-    <table>
-        <tr>
-            <td>Name:</td>
-            <td th:text="${editedCustomer.name}"/>
-            <td><input type="text" th:field="*{name}"/>
-                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Last name:</td>
-            <td th:text="${editedCustomer.lastName}"/>
-            <td><input type="text" th:field="*{lastName}"/>
-                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>City:</td>
-            <td th:text="${editedCustomer.city}"/>
-            <td><input type="text" th:field="*{city}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Street:</td>
-            <td th:text="${editedCustomer.street}"/>
-            <td><input type="text" th:field="*{street}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Zip Code:</td>
-            <td th:text="${editedCustomer.zipCode}"/>
-            <td><input type="text" th:field="*{zipCode}"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td th:text="${editedCustomer.password}"/>
-            <td><input type="text" th:field="*{password}"/>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Confirm edition"/></td>
-        </tr>
-    </table>
-</form><br/>
-<form action="/customers">
-    <input type="submit" value="Return to customers">
-</form>
+<div align="center">
+    <h1>Edit customer details</h1>
+    <form th:action="@{/customers/edit}" method="post" th:object="${editedCustomer}">
+        <input type="hidden" th:field="*{id}" th:attr="name='customerId'">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td th:text="${editedCustomer.name}"/>
+                <td><input type="text" th:field="*{name}"/>
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${editedCustomer.lastName}"/>
+                <td><input type="text" th:field="*{lastName}"/>
+                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${editedCustomer.city}"/>
+                <td><input type="text" th:field="*{city}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Street:</td>
+                <td th:text="${editedCustomer.street}"/>
+                <td><input type="text" th:field="*{street}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Zip Code:</td>
+                <td th:text="${editedCustomer.zipCode}"/>
+                <td><input type="text" th:field="*{zipCode}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td th:text="${editedCustomer.password}"/>
+                <td><input type="text" th:field="*{password}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Confirm edition"/></td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+    <form action="/customers">
+        <input type="submit" value="Return to customers">
+    </form>
+</div>
 </body>
 </html>
