@@ -5,17 +5,20 @@
     <title>Workers</title>
 </head>
 <body>
+
+<form action="/logout" style="float: right">
+    <input type="submit" value="Log out">
+</form>
+
 <h1>Workers</h1>
 <div th:if="${not #lists.isEmpty(workersList)}">
 <table>
     <tr>
-        <th>Id</th>
         <th>Login</th>
         <th>Added</th>
         <th>Modified</th>
     </tr>
     <tr th:each="worker : ${workersList}" th:object="${worker}">
-        <td th:text="*{id}"/>
         <td th:text="*{login}"/>
         <td th:text="*{added}"/>
         <td th:text="*{modified}"/>

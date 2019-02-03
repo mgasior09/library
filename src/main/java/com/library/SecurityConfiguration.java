@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin().defaultSuccessUrl("/search")
                 .and()
-                    .logout().logoutSuccessUrl("/search")
+                    .logout().logoutSuccessUrl("/search/go")
                 .and()
                     .exceptionHandling().accessDeniedPage("/search/go")
                 .and()

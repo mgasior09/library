@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Customers</title>
 </head>
 <body>
+
+<form action="/logout" style="float: right">
+    <input type="submit" value="Log out">
+</form>
+
 <h1>Customers</h1>
 
 <div th:if="${not #lists.isEmpty(customersList)}">
     <table>
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Last Name</th>
         </tr>
         <tr th:each="customer : ${customersList}" th:object="${customer}">
-            <td th:text="*{id}"/>
             <td th:text="*{name}"/>
             <td th:text="*{lastName}"/>
             <td><a th:href="@{/customers/details/{customerId}(customerId=*{id})}"
