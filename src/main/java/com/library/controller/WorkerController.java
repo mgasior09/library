@@ -41,10 +41,15 @@ public class WorkerController {
             @Valid @ModelAttribute("registeredWorker") Worker worker,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addWorker";
+            return "redirect:/workers/error";
         }
-        workerService.registerWorker(worker);
-        workerService.addRoleToWorker(workerService.addWorkerToUserDatabase(worker));
+
+        try {
+            workerService.registerWorker(worker);
+            workerService.addRoleToWorker(workerService.addWorkerToUserDatabase(worker));
+        } catch (RuntimeException e) {
+            return "redirect:/workers/error";
+        }
         return "redirect:/workers";
     }
 
@@ -66,5 +71,10 @@ public class WorkerController {
                              @ModelAttribute("password") String password) {
         workerService.editPassword(worker.getId(), password);
         return "redirect:/workers";
+    }
+
+    @GetMapping("/error")
+    public String printErrorScreen() {
+        return "errorScreen";
     }
 }

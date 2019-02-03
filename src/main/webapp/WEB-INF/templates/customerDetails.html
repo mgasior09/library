@@ -37,11 +37,10 @@
         <td><a th:href="@{/customers/delete/{customerId}(customerId=*{id})}"
                th:text="Delete"/></td>
     </tr>
-</table>
-
+</table><br/>
 <form action="/customers/add">
     <input type="submit" value="Add new customer">
-</form>
+</form><br/>
 <form action="/customers">
     <input type="submit" value="Return to customers">
 </form>

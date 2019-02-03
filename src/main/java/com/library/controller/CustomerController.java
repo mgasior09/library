@@ -41,16 +41,15 @@ public class CustomerController {
             @Valid @ModelAttribute("registeredCustomer") Customer customer,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addCustomer";
+            return "redirect:/customers/error";
         }
 
         try {
             customerService.registerCustomer(customer);
             customerService.addRoleToCustomer(customerService.addCustomerToUserDatabase(customer));
-        } catch (StringIndexOutOfBoundsException e) {
-            return "redirect:/customers/add";
+        } catch (RuntimeException e) {
+            return "redirect:/customers/error";
         }
-
         return "redirect:/customers";
     }
 
@@ -80,4 +79,8 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
+    @GetMapping("/error")
+    public String printErrorScreen () {
+        return "errorScreen";
+    }
 }
