@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Workers</h1>
+<div th:if="${not #lists.isEmpty(workersList)}">
 <table>
     <tr>
         <th>Id</th>
@@ -24,6 +25,10 @@
                th:text="Delete"/></td>
     </tr>
 </table>
+</div>
+<div th:if="${#lists.isEmpty(workersList)}">
+    The are no workers in our database.
+</div>
 
 <form action="/workers/add">
     <input type="submit" value="Add new worker">
