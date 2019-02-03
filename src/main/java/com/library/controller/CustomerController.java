@@ -60,6 +60,13 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
+    @GetMapping("/details/{id}")
+    public String showCustomerDetails(Model model, @PathVariable("id") Integer userId) {
+        Optional<Customer> foundCustomer = customerService.getById(userId);
+        foundCustomer.ifPresent(customer -> model.addAttribute("customer", customer));
+        return "customerDetails";
+    }
+
     @GetMapping("/edit/{id}")
     public String initCustomerEditForm(@PathVariable("id") Integer customerId, Model model) {
         Optional<Customer> foundCustomer = customerService.getById(customerId);
@@ -72,4 +79,5 @@ public class CustomerController {
         customerService.editCustomer(customer.getId(), customer);
         return "redirect:/customers";
     }
+
 }

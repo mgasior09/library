@@ -11,31 +11,13 @@
         <th>Id</th>
         <th>Name</th>
         <th>Last Name</th>
-        <th>Birth Date</th>
-        <th>City</th>
-        <th>Street</th>
-        <th>Zip Code</th>
-        <th>Pesel</th>
-        <th>Sex</th>
-        <th>Added</th>
-        <th>Modified</th>
     </tr>
     <tr th:each="customer : ${customersList}" th:object="${customer}">
         <td th:text="*{id}"/>
         <td th:text="*{name}"/>
         <td th:text="*{lastName}"/>
-        <td th:text="*{birthDate}"/>
-        <td th:text="*{city}"/>
-        <td th:text="*{street}"/>
-        <td th:text="*{zipCode}"/>
-        <td th:text="*{pesel}"/>
-        <td th:text="*{sex}"/>
-        <td th:text="*{added}"/>
-        <td th:text="*{modified}"/>
-        <td><a th:href="@{/customers/edit/{customerId}(customerId=*{id})}"
-               th:text="Edit"/></td>
-        <td><a th:href="@{/customers/delete/{customerId}(customerId=*{id})}"
-               th:text="Delete"/></td>
+        <td><a th:href="@{/customers/details/{customerId}(customerId=*{id})}"
+               th:text="Details"/></td>
     </tr>
 </table>
 
