@@ -6,20 +6,26 @@
 </head>
 <body>
 <h1>Customers</h1>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Last Name</th>
-    </tr>
-    <tr th:each="customer : ${customersList}" th:object="${customer}">
-        <td th:text="*{id}"/>
-        <td th:text="*{name}"/>
-        <td th:text="*{lastName}"/>
-        <td><a th:href="@{/customers/details/{customerId}(customerId=*{id})}"
-               th:text="Details"/></td>
-    </tr>
-</table>
+
+<div th:if="${not #lists.isEmpty(customersList)}">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Last Name</th>
+        </tr>
+        <tr th:each="customer : ${customersList}" th:object="${customer}">
+            <td th:text="*{id}"/>
+            <td th:text="*{name}"/>
+            <td th:text="*{lastName}"/>
+            <td><a th:href="@{/customers/details/{customerId}(customerId=*{id})}"
+                   th:text="Details"/></td>
+        </tr>
+    </table>
+</div>
+<div th:if="${#lists.isEmpty(customersList)}">
+    The are no customers in our database.
+</div>
 
 <form action="/customers/add">
     <input type="submit" value="Add new customer">

@@ -29,13 +29,14 @@ public class SearchController {
     public String printStartPage(Model model, Principal principal) {
         String userName = principal.getName();
         String userRole = bookService.findRoleByUserName(userName);
-        switch (userRole) {
-            case "ROLE_WORKER":
-                return "customers";
-            case "ROLE_ADMIN":
-                return "workers";
-            default:
-                return "search";
+        if (userRole.equals("ROLE_WORKER")) {
+            return "redirect:/customers";
+        } else if (userRole.equals("ROLE_ADMIN")) {
+            return "redirect:/workers";
+        } else if (userRole.equals("ROLE_USER")) {
+            return "redirect:/search/go";
+        } else {
+            return "search/go";
         }
     }
 
