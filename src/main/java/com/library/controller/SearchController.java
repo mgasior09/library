@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -20,8 +21,17 @@ public class SearchController {
     }
 
     @GetMapping
-    public String printStartPage(Model model) {
-        return "search";
+    public String printStartPage(Model model, Principal principal) {
+        String userName = principal.getName();
+        String userRole = bookService.findRoleByUserName(userName);
+        switch (userRole) {
+            case "ROLE_WORKER":
+                return "customers";
+            case "ROLE_ADMIN":
+                return "workers";
+            default:
+                return "search";
+        }
     }
 
     @GetMapping("/byTitle")

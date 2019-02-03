@@ -37,12 +37,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/search").hasAnyRole("USER","WORKER", "ADMIN")
                     .antMatchers("/customers/**").hasAnyRole("WORKER", "ADMIN")
                     .antMatchers("/books/**").hasAnyRole("WORKER", "ADMIN")
-                    .antMatchers("workers/**").hasAnyRole("ADMIN")
+                    .antMatchers("/workers/**").hasAnyRole("ADMIN")
                     .anyRequest().permitAll()
                 .and()
                     .formLogin().defaultSuccessUrl("/search")
                 .and()
                     .logout().logoutSuccessUrl("/search")
+                .and()
+                    .exceptionHandling().accessDeniedPage("/search")
                 .and()
                     .httpBasic();
     }

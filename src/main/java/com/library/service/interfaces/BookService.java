@@ -22,4 +22,6 @@ public interface BookService {
     List<Book> findByAuthor(Author author);
 
     List<Book> findByPublisher(String publisher);
+
+    String findRoleByUserName(String userName);
 }

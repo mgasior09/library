@@ -2,8 +2,12 @@ package com.library.service;
 
 import com.library.model.Author;
 import com.library.model.Book;
+import com.library.model.User;
+import com.library.model.UserRole;
 import com.library.repository.interfaces.AuthorRepository;
 import com.library.repository.interfaces.BookRepository;
+import com.library.repository.interfaces.UserRepository;
+import com.library.repository.interfaces.UserRoleRepository;
 import com.library.service.interfaces.AuthorService;
 import com.library.service.interfaces.BookService;
 import org.springframework.stereotype.Service;
@@ -16,12 +20,15 @@ import java.util.Optional;
 public class DefaultBookService implements BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
 
 
-    public DefaultBookService(BookRepository bookRepository, AuthorRepository authorRepository) {
+    public DefaultBookService(BookRepository bookRepository, AuthorRepository authorRepository, UserRepository userRepository, UserRoleRepository userRoleRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
-
+        this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
     }
 
     @Override
@@ -73,5 +80,12 @@ public class DefaultBookService implements BookService {
 
     public List<Book> findByPublisher(String publisher) {
         return bookRepository.findByPublisher(publisher);
+    }
+
+    @Override
+    public String findRoleByUserName(String userName) {
+        Optional<User> foundUser = userRepository.findByUsername(userName);
+        UserRole userRole = userRoleRepository.findUserRoleByUser(foundUser.get()).get();
+        return userRole.getRoleName();
     }
 }
