@@ -70,22 +70,32 @@ public class DefaultBookService implements BookService {
         return bookRepository.findByIsbn(isbn);
     }
 
-    public List<Book> findByTitle(String title) {
-        return bookRepository.findByTitleLike(title);
-    }
-
-    public List<Book> findByAuthor(Author author) {
-        return bookRepository.findByAuthor(author);
-    }
-
-    public List<Book> findByPublisher(String publisher) {
-        return bookRepository.findByPublisher(publisher);
-    }
-
     @Override
     public String findRoleByUserName(String userName) {
         Optional<User> foundUser = userRepository.findByUsername(userName);
         UserRole userRole = userRoleRepository.findUserRoleByUser(foundUser.get()).get();
         return userRole.getRoleName();
+    }
+
+    @Override
+    public List<Book> findBookByAuthorAndTitle(String name, String lastName, String title) {
+        return bookRepository.findByAuthor_NameAndAuthor_LastName_AndTitle(name, lastName, title);
+    }
+
+    @Override
+    public List<Book> findBookByAuthorAndPublisher(String name, String lastName, String publisher) {
+        return bookRepository.findByAuthor_NameAndAuthor_LastName_AndPublisher(name, lastName, publisher);
+    }
+
+
+    @Override
+    public List<Book> findBookByTitleAndPublisher(String title, String publisher) {
+        return bookRepository.findByTitleAndPublisher(title, publisher);
+    }
+
+    @Override
+    public List<Book> findBookByAuthorAndTitleAndPublisher(String name, String lastName, String title, String publisher) {
+        return bookRepository.findByAuthor_NameAndAuthor_LastName_AndTitleAndPublisher(
+                name, lastName, title, publisher);
     }
 }

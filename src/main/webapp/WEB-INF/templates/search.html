@@ -11,19 +11,19 @@
         <input type="submit" value="Log in">
     </form>
 
-    <!--<form action="/search/byIsbn" method="get">-->
-    <!--<input type="text" name="q">-->
-    <!--<input type="hidden" name="ie" value="utf-8">-->
-    <!--<select name="sitesearch">-->
-    <!--<option value="/byTitle">by title</option>-->
-    <!--<option value="domena">by author</option>-->
-    <!--<option value="">by publishing house</option>-->
-    <!--<option value="/byIsbn" name = "isbn">by ISBN</option>-->
-    <!--</select>-->
-    <!--<input type="submit" value="Szukaj">-->
-    <!--</form>-->
+    <form action="/search/notByIsbn" method="get">
+        Title:
+        <input type="text" name="title"><br>
+        Author's name and last name:
+        <input type="text" name="name">
+        <input type="text" name="lastName"><br>
+        Publisher:
+        <input type="text" name="publisher"><br>
+        <input type="submit" value="Szukaj">
+    </form>
+
     <form action="/search/byIsbn" method="get">
-        ISBN:
+        Find by ISBN:
         <input type="text" name="isbn"><br>
         <input type="submit" value="Szukaj">
     </form>

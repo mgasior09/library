@@ -17,11 +17,13 @@ public interface BookService {
 
     Optional<Book> findByIsbn(String isbn);
 
-    List<Book> findByTitle(String title);
-
-    List<Book> findByAuthor(Author author);
-
-    List<Book> findByPublisher(String publisher);
-
     String findRoleByUserName(String userName);
+
+    List<Book> findBookByAuthorAndTitle (String name, String lastName, String title);
+
+    List<Book> findBookByAuthorAndPublisher (String name, String lastName, String publisher);
+
+    List<Book> findBookByTitleAndPublisher(String title, String publisher);
+
+    List<Book> findBookByAuthorAndTitleAndPublisher (String name, String lastName, String title, String publisher);
 }

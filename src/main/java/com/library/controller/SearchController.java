@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.model.Author;
 import com.library.model.Book;
 import com.library.service.interfaces.BookService;
 import org.springframework.stereotype.Controller;
@@ -43,10 +44,30 @@ public class SearchController {
         }
     }
 
-    @GetMapping("/byTitle")
-    public String searchByTitle(String title, Model model) {
-        List<Book> bookList = bookService.findByTitle(title);
-        model.addAttribute("bookList", bookList);
+    @GetMapping("/notByIsbn")
+    public String searchBook(
+            @ModelAttribute("title") String title,
+            @ModelAttribute("publisher") String publisher,
+            @ModelAttribute("name") String name,
+            @ModelAttribute("lastName") String lastName,
+            Model model) {
+
+        if (name.equals("") && lastName.equals("")) {
+        List<Book> books = bookService.findBookByTitleAndPublisher(title, publisher);
+        model.addAttribute("booksList", books);
+        } else if (publisher.equals("")) {
+            List<Book> books = bookService.findBookByAuthorAndTitle(name, lastName, title);
+            model.addAttribute("booksList", books);
+        } else if (title.equals("")) {
+            List<Book> books = bookService.findBookByAuthorAndPublisher(name, lastName, publisher);
+            model.addAttribute("booksList", books);
+        } else if (!name.equals("") && !lastName.equals("") && !publisher.equals("") && !title.equals("")) {
+            List<Book> books = bookService.findBookByAuthorAndTitleAndPublisher(name, lastName, title, publisher);
+            model.addAttribute("booksList", books);
+        } else {
+            List<Book> books = new ArrayList<>();
+            model.addAttribute("booksList", books);
+        }
         return "foundBooks";
     }
 
