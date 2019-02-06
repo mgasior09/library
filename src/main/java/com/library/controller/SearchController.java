@@ -6,10 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/search")
@@ -44,7 +47,17 @@ public class SearchController {
     public String searchByTitle(String title, Model model) {
         List<Book> bookList = bookService.findByTitle(title);
         model.addAttribute("bookList", bookList);
-        return "search";
+        return "foundBooks";
     }
+
+    @GetMapping("/byIsbn")
+    public String searchByIsbn(@ModelAttribute("isbn") String isbn, Model model) {
+        Optional<Book> foundBook = bookService.findByIsbn(isbn);
+        List<Book> books = new ArrayList<>();
+        foundBook.ifPresent(book -> books.add(foundBook.get()));
+        model.addAttribute("booksList", books);
+        return "foundBooks";
+    }
+
 
 }

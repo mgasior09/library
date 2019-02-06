@@ -1,22 +1,32 @@
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head><title>Library start page</title></head>
 <body>
 
+<div align="center">
     <form action="/logout" style="float: right">
         <input type="submit" value="Log out">
     </form>
 
+    <form action="/search" style="float: right">
+        <input type="submit" value="Log in">
+    </form>
 
-<form action="http://www.google.pl/search" method="get">
-    <input type="text" name="q">
-    <input type="hidden" name="ie" value="utf-8">
-    <select name="sitesearch">
-        <option value="/byTitle">by title</option>
-        <option value="domena">by author</option>
-        <option value="">by publishing house</option>
-        <option value="">by ISBN</option>
-    </select>
-    <input type="submit" value="Szukaj">
-</form>
+    <!--<form action="/search/byIsbn" method="get">-->
+    <!--<input type="text" name="q">-->
+    <!--<input type="hidden" name="ie" value="utf-8">-->
+    <!--<select name="sitesearch">-->
+    <!--<option value="/byTitle">by title</option>-->
+    <!--<option value="domena">by author</option>-->
+    <!--<option value="">by publishing house</option>-->
+    <!--<option value="/byIsbn" name = "isbn">by ISBN</option>-->
+    <!--</select>-->
+    <!--<input type="submit" value="Szukaj">-->
+    <!--</form>-->
+    <form action="/search/byIsbn" method="get">
+        ISBN:
+        <input type="text" name="isbn"><br>
+        <input type="submit" value="Szukaj">
+    </form>
+</div>
 </body>
 </html>
