@@ -1,6 +1,5 @@
 package com.library.repository.interfaces;
 
-import com.library.model.Author;
 import com.library.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 

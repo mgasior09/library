@@ -4,18 +4,23 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(
+        name = "released",
+        schema = "library_project"
+)
+
 public class Release {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer year;
+    private String city;
     private String name;
     private Date added;
     private Date modified;
     @ManyToOne
-    @JoinColumn(name="book_id")
+    @JoinColumn(name = "book_id")
     private Book book;
-
 
     public Integer getId() {
         return id;
@@ -63,5 +68,13 @@ public class Release {
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

@@ -1,8 +1,6 @@
 package com.library.model;
 
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -19,7 +17,7 @@ public class Book {
     private String isbn;
     private Date added;
     private Date modified;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
     private String publisher;

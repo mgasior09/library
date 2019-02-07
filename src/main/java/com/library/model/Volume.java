@@ -1,9 +1,6 @@
 package com.library.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -11,7 +8,9 @@ public class Volume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private  Integer releaseId;
+    @ManyToOne
+    @JoinColumn(name = "release_id")
+    private Release release;
     private boolean hardCover;
     private Date added;
     private Date modified;
@@ -31,14 +30,6 @@ public class Volume {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getReleaseId() {
-        return releaseId;
-    }
-
-    public void setReleaseId(Integer releaseId) {
-        this.releaseId = releaseId;
     }
 
     public boolean isHardCover() {
@@ -63,5 +54,13 @@ public class Volume {
 
     public void setModified(Date modified) {
         this.modified = modified;
+    }
+
+    public Release getRelease() {
+        return release;
+    }
+
+    public void setRelease(Release release) {
+        this.release = release;
     }
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Releases</title>
+</head>
+<body>
+<div align="center">
+    <form action="/logout" style="float: right">
+        <input type="submit" value="Log out">
+    </form><br/>
+    <h1>Book releases</h1>
+    <div th:if="${not #lists.isEmpty(releasesList)}">
+        <table border="1">
+            <tr>
+                <th>Book</th>
+                <th>Year</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Added</th>
+                <th>Modified</th>
+            </tr>
+            <tr th:each="release : ${releasesList}" th:object="${release}">
+                <td th:text="*{book.title}"/>
+                <td th:text="*{year}"/>
+                <td th:text="*{name}"/>
+                <td th:text="*{city}"/>
+                <td th:text="*{added}"/>
+                <td th:text="*{modified}"/>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <div th:if="${#lists.isEmpty(releasesList)}">
+        The are no releases for this book.
+    </div>
+    <br/>
+
+    <!--<form action="/workers/add">-->
+        <!--<input type="submit" value="Add new worker">-->
+    <!--</form>-->
+    <!--<br/>-->
+    <!--<form action="/search/go">-->
+        <!--<input type="submit" value="Return to search">-->
+    <!--</form>-->
+</div>
+</body>
+</html>
