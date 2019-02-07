@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface BookService {
     Book addBook(Book book);
-    void editBook(Integer bookId);
+    void editBook(Integer bookId, Book book);
     void deleteById(Integer id);
 
     Optional<Book> getById(Integer bookId);

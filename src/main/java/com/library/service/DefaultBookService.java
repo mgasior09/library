@@ -46,10 +46,15 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public void editBook(Integer bookId) {
-        Book book = bookRepository.findById(bookId).get();
-        book.setModified(new Date());
-        bookRepository.save(book);
+    public void editBook(Integer bookId, Book book) {
+        Book oldBbook = bookRepository.findById(bookId).get();
+        oldBbook.setTitle(book.getTitle());
+        oldBbook.setIsbn(book.getIsbn());
+        oldBbook.setPublisher(book.getPublisher());
+        oldBbook.getAuthor().setName(book.getAuthor().getName());
+        oldBbook.getAuthor().setLastName(book.getAuthor().getLastName());
+        oldBbook.setModified(new Date());
+        bookRepository.save(oldBbook);
     }
 
     @Override

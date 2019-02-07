@@ -48,7 +48,7 @@ public class BookController {
 
     @PostMapping("/edit")
     public String editBook(@ModelAttribute Book book) {
-        bookService.editBook(book.getId());
+        bookService.editBook(book.getId(), book);
         return "redirect:/books";
     }
 
