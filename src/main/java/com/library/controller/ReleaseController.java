@@ -49,4 +49,10 @@ public class ReleaseController {
         releaseService.addReleaseToBook(release);
         return "redirect:/books";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable("id") Integer releaseId) {
+        releaseService.deleteById(releaseId);
+        return "redirect:/books";
+    }
 }

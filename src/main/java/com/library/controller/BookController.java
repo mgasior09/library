@@ -58,8 +58,8 @@ public class BookController {
         return "books";
     }
 
-    @GetMapping("delete/{id}")
-    public String deleteById(@PathVariable("id") Integer bookId, Model model) {
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable("id") Integer bookId) {
         bookService.deleteById(bookId);
         return "redirect:/books";
     }

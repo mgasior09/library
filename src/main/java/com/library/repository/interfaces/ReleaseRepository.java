@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ReleaseRepository extends JpaRepository<Release, Integer> {
     List<Release> findByBook_Id(Integer bookId);
+    void deleteById(Integer releaseId);
 }

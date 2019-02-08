@@ -5,6 +5,9 @@ import com.library.model.Release;
 import java.util.List;
 
 public interface ReleaseService {
-    List<Release> getReleaseByBookId (Integer bookId);
+    List<Release> getReleaseByBookId(Integer bookId);
+
     Release addReleaseToBook(Release release);
+
+    void deleteById(Integer releaseId);
 }

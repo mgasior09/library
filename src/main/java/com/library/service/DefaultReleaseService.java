@@ -1,6 +1,5 @@
 package com.library.service;
 
-import com.library.model.Book;
 import com.library.model.Release;
 import com.library.repository.interfaces.BookRepository;
 import com.library.repository.interfaces.ReleaseRepository;
@@ -13,11 +12,9 @@ import java.util.List;
 @Service
 public class DefaultReleaseService implements ReleaseService {
     private final ReleaseRepository releaseRepository;
-    private final BookRepository bookRepository;
 
-    public DefaultReleaseService(ReleaseRepository releaseRepository, BookRepository bookRepository) {
+    public DefaultReleaseService(ReleaseRepository releaseRepository) {
         this.releaseRepository = releaseRepository;
-        this.bookRepository = bookRepository;
     }
 
     @Override
@@ -29,5 +26,10 @@ public class DefaultReleaseService implements ReleaseService {
     public Release addReleaseToBook(Release release) {
         release.setAdded(new Date());
         return releaseRepository.save(release);
+    }
+
+    @Override
+    public void deleteById(Integer releaseId) {
+        releaseRepository.deleteById(releaseId);
     }
 }

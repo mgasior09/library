@@ -27,6 +27,8 @@
                 <td th:text="*{city}"/>
                 <td th:text="*{added}"/>
                 <td th:text="*{modified}"/>
+                <td><a th:href="@{delete/{releaseId}(releaseId=*{id})}"
+                       th:text="Delete"/></td>
             </tr>
         </table>
 
