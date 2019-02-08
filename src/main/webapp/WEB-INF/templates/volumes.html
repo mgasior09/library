@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Volumes</title>
+</head>
+<body>
+<div align="center">
+    <form action="/logout" style="float: right">
+        <input type="submit" value="Log out">
+    </form><br/>
+    <h1>Volumes</h1>
+    <div th:if="${not #lists.isEmpty(volumesList)}">
+        <table border="1">
+            <tr>
+                <th>Book</th>
+                <th>Hard Cover</th>
+                <th>Rented</th>
+                <th>Added</th>
+                <th>Modified</th>
+            </tr>
+            <tr th:each="volume : ${volumesList}" th:object="${volume}">
+                <td th:text="*{release.book.title}"/>
+                <td th:text="*{hardCover}"/>
+                <td th:text="*{rented}"/>
+                <td th:text="*{added}"/>
+                <td th:text="*{modified}"/>
+                <td><a th:href="@{delete/{volumeId}(volumeId=*{id})}"
+                       th:text="Delete"/></td>
+            </tr>
+        </table>
+
+    </div>
+    <br/>
+    <div th:if="${#lists.isEmpty(volumesList)}">
+        The are no volumes for this release.
+    </div>
+    <br/>
+
+    <!--<form action="/workers/add">-->
+    <!--<input type="submit" value="Add new worker">-->
+    <!--</form>-->
+    <!--<br/>-->
+    <!--<form action="/search/go">-->
+    <!--<input type="submit" value="Return to search">-->
+    <!--</form>-->
+</div>
+</body>
+</html>

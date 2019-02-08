@@ -27,18 +27,23 @@
                 <td th:text="*{city}"/>
                 <td th:text="*{added}"/>
                 <td th:text="*{modified}"/>
+                <td><a th:href="@{/volumes/{releaseId}(releaseId=*{id})}"
+                       th:text="Volumes"/></td>
                 <td><a th:href="@{delete/{releaseId}(releaseId=*{id})}"
                        th:text="Delete"/></td>
+                <td><a th:href="@{/volumes/add/{releaseId}(releaseId=*{id})}"
+                       th:text="Add_Volume"/></td>
             </tr>
         </table>
-
     </div>
     <br/>
     <div th:if="${#lists.isEmpty(releasesList)}">
         The are no releases for this book.
     </div>
     <br/>
-
+    <form action="/books">
+        <input type="submit" value="Return to books">
+    </form>
     <!--<form action="/workers/add">-->
         <!--<input type="submit" value="Add new worker">-->
     <!--</form>-->

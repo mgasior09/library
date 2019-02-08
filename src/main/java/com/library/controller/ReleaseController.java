@@ -4,6 +4,7 @@ import com.library.model.Book;
 import com.library.model.Release;
 import com.library.service.interfaces.BookService;
 import com.library.service.interfaces.ReleaseService;
+import com.library.service.interfaces.VolumeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +20,7 @@ public class ReleaseController {
     private final ReleaseService releaseService;
     private final BookService bookService;
 
-    public ReleaseController(ReleaseService releaseService, BookService bookService) {
+    public ReleaseController(ReleaseService releaseService, BookService bookService, VolumeService volumeService) {
         this.releaseService = releaseService;
         this.bookService = bookService;
     }
@@ -34,9 +35,9 @@ public class ReleaseController {
     @GetMapping("/add/{id}")
     public String initReleaseAddForm(@PathVariable("id") Integer bookId, Model model) {
         Release release = new Release();
-        model.addAttribute("addedRelease", release);
         Optional<Book> book = bookService.getById(bookId);
         release.setBook(book.get());
+        model.addAttribute("addedRelease", release);
         model.addAttribute("bookId", bookId);
         return "addRelease";
     }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Volume</title>
+    <style>
+        .fieldError {
+            border-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <h1>Add release to book"</h1>
+    <form action="#" th:action="@{/volumes}" th:object="${addedVolume}" method="post">
+        <input type="hidden" th:field="*{release.id}" th:attr="name='releaseId'">
+        <input type="hidden" th:field="*{rented}" th:attr="name='0'">
+        <table>
+            <tr>
+                <td>Hard Cover</td>
+                <td>
+                    <input type="number" th:field="*{hardCover}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('hardCover')}" th:errors="*{hardCover}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit"/></td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+</div>
+</body>
+</html>

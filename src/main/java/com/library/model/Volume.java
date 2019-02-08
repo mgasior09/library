@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(
+        name = "volume_table",
+        schema = "library_project"
+)
 public class Volume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,6 +15,7 @@ public class Volume {
     @ManyToOne
     @JoinColumn(name = "release_id")
     private Release release;
+    @Column(name = "hard_cover")
     private boolean hardCover;
     private Date added;
     private Date modified;
