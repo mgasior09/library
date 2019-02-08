@@ -1,11 +1,13 @@
 package com.library.service;
 
+import com.library.model.Book;
 import com.library.model.Release;
 import com.library.repository.interfaces.BookRepository;
 import com.library.repository.interfaces.ReleaseRepository;
 import com.library.service.interfaces.ReleaseService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,6 +27,7 @@ public class DefaultReleaseService implements ReleaseService {
 
     @Override
     public Release addReleaseToBook(Release release) {
-        return null;
+        release.setAdded(new Date());
+        return releaseRepository.save(release);
     }
 }

@@ -36,6 +36,8 @@
                    th:text="Delete"/></td>
             <td><a th:href="@{/releases/{bookId}(bookId=*{id})}"
                    th:text="Releases"/></td>
+            <td><a th:href="@{/releases/add/{bookId}(bookId=*{id})}"
+                   th:text="Add_Release"/></td>
         </tr>
 
     </table>

@@ -61,6 +61,7 @@ public class DefaultBookService implements BookService {
     public void deleteById(Integer id) {
         bookRepository.deleteById(id);
     }
+
     @Override
     public Optional<Book> getById(Integer bookId) {
         return bookRepository.findById(bookId);
