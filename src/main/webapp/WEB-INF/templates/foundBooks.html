@@ -32,10 +32,10 @@
                 <td><a th:href="@{/releases/{bookId}(bookId=*{id})}"
                        th:text="Releases"/></td>
                 <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')">
-                <td><a th:href="@{/books/edit/{bookId}(bookId=*{id})}"
-                       th:text="Edit"/></td>
-                <td><a th:href="@{/books/delete/{bookId}(bookId=*{id})}"
-                       th:text="Delete"/></td>
+                    <td><a th:href="@{/books/edit/{bookId}(bookId=*{id})}"
+                           th:text="Edit"/></td>
+                    <td><a th:href="@{/books/delete/{bookId}(bookId=*{id})}"
+                           th:text="Delete"/></td>
                 </div>
             </tr>
         </table>
@@ -44,7 +44,8 @@
     <div th:if="${#lists.isEmpty(booksList)}">
         Brak szukanej książki lub nie spełniono warunków wyszukiwania.<br/>
         Pamiętaj, by podać numer ISBN lub dwa inne pełne kryteria.
-    </div><br/>
+    </div>
+    <br/>
 
     <form action="/search/go">
         <input type="submit" value="Return to searcher">
