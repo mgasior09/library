@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultVolumeService implements VolumeService {
@@ -31,5 +32,12 @@ public class DefaultVolumeService implements VolumeService {
     @Override
     public void deleteById(Integer volumeId) {
         volumeRepository.deleteById(volumeId);
+    }
+
+    @Override
+    public void setReservation(Integer volumeId) {
+        Optional<Volume> foundVolume = volumeRepository.findById(volumeId);
+        foundVolume.get().setReserved(true);
+        volumeRepository.save(foundVolume.get());
     }
 }

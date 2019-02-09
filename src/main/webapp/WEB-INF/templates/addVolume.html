@@ -19,7 +19,7 @@
             <tr>
                 <td>Hard Cover</td>
                 <td>
-                    <input type="number" th:field="*{hardCover}" th:errorclass="fieldError"/>
+                    <input type="checkbox" th:field="*{hardCover}" th:errorclass="fieldError"/>
                     <span th:if="${#fields.hasErrors('hardCover')}" th:errors="*{hardCover}"/>
                 </td>
             </tr>
@@ -29,6 +29,7 @@
         </table>
     </form>
     <br/>
+    <button type="button" onclick="javascript:history.back()">Return to previous page</button>
 </div>
 </body>
 </html>

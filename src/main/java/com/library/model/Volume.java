@@ -1,6 +1,7 @@
 package com.library.model;
 
 import javax.persistence.*;
+
 import java.util.Date;
 
 @Entity
@@ -20,6 +21,15 @@ public class Volume {
     private Date added;
     private Date modified;
     private boolean rented;
+    private boolean reserved;
+
+    public boolean isReserved() {
+        return reserved;
+    }
+
+    public void setReserved(boolean reserved) {
+        this.reserved = reserved;
+    }
 
     public boolean isRented() {
         return rented;

@@ -14,6 +14,6 @@ public interface CustomerService {
     UserRole addRoleToCustomer(User user);
     void deleteById(Integer id);
     void editCustomer(Integer id, Customer customer);
-    Optional<Customer> getById(Integer workerId);
+    Optional<Customer> getById(Integer customererId);
 
 }

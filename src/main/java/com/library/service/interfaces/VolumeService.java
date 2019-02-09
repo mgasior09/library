@@ -10,4 +10,5 @@ public interface VolumeService {
     List<Volume> getVolumeByReleaseId(Integer releaseId);
 
     void deleteById(Integer volumeId);
+    void setReservation(Integer volumeId);
 }
