@@ -48,8 +48,12 @@ public class VolumeController {
 
     @GetMapping("/reserve/{id}")
     public String reserveById(@PathVariable("id") Integer volumeId, Model model) {
-        volumeService.setReservation(volumeId);
-        return "redirect:/books";
+        Volume reservedVolume = volumeService.setReservation(volumeId);
+        if (reservedVolume != null) {
+            return "redirect:/books";
+        } else {
+            return "errorScreenReserved";
+        }
     }
 
     @GetMapping("/rent/{id}")

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!--suppress ALL -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
     <meta charset="UTF-8">
     <title>Books</title>
@@ -18,8 +20,6 @@
                 <th>ISBN</th>
                 <th>Added</th>
                 <th>Modified</th>
-                <th>Edit</th>
-                <th>Delete</th>
             </tr>
             <tr th:each="book : ${booksList}" th:object="${book}">
                 <td th:text="*{title}"/>
@@ -29,12 +29,14 @@
                 <td th:text="*{isbn}"/>
                 <td th:text="*{added}"/>
                 <td th:text="*{modified}"/>
+                <td><a th:href="@{/releases/{bookId}(bookId=*{id})}"
+                       th:text="Releases"/></td>
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')">
                 <td><a th:href="@{/books/edit/{bookId}(bookId=*{id})}"
                        th:text="Edit"/></td>
                 <td><a th:href="@{/books/delete/{bookId}(bookId=*{id})}"
                        th:text="Delete"/></td>
-                <td><a th:href="@{/releases/{bookId}(bookId=*{id})}"
-                       th:text="Releases"/></td>
+                </div>
             </tr>
         </table>
     </div>

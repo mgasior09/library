@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Volumes</title>
@@ -8,7 +9,8 @@
 <div align="center">
     <form action="/logout" style="float: right">
         <input type="submit" value="Log out">
-    </form><br/>
+    </form>
+    <br/>
     <h1>Volumes</h1>
     <div th:if="${not #lists.isEmpty(volumesList)}">
         <table border="1">
@@ -20,7 +22,9 @@
                 <th>Modified</th>
                 <th>Reserved</th>
                 <th>Reservation</th>
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')">
                 <th>Delete</th>
+                </div>
             </tr>
             <tr th:each="volume : ${volumesList}" th:object="${volume}">
                 <td th:text="*{release.book.title}"/>
@@ -29,12 +33,17 @@
                 <td th:text="*{added}"/>
                 <td th:text="*{modified}"/>
                 <td th:text="*{reserved}"/>
-                <td><a th:href="@{reserve/{volumeId}(volumeId=*{id})}"
-                       th:text="Reserve"/></td>
-                <td><a th:href="@{rent/{volumeId}(volumeId=*{id})}"
-                       th:text="Rent"/></td>
-                <td><a th:href="@{delete/{volumeId}(volumeId=*{id})}"
-                       th:text="Delete"/></td>
+                <div sec:authorize="hasRole('ROLE_USER')">
+                    <td><a th:href="@{reserve/{volumeId}(volumeId=*{id})}"
+                           th:text="Reserve"/></td>
+                </div>
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')">
+                    <td><a th:href="@{rent/{volumeId}(volumeId=*{id})}"
+                           th:text="Confirm_rent"/></td>
+                    <td><a th:href="@{delete/{volumeId}(volumeId=*{id})}"
+                           th:text="Delete"/></td>
+                </div>
+
             </tr>
         </table>
     </div>
@@ -45,14 +54,6 @@
     <br/>
     <button type="button" onclick="javascript:history.back()">Return to previous page</button>
     <br/>
-
-    <!--<form action="/workers/add">-->
-    <!--<input type="submit" value="Add new worker">-->
-    <!--</form>-->
-    <!--<br/>-->
-    <!--<form action="/search/go">-->
-    <!--<input type="submit" value="Return to search">-->
-    <!--</form>-->
 </div>
 </body>
 </html>

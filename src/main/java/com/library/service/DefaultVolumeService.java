@@ -35,9 +35,14 @@ public class DefaultVolumeService implements VolumeService {
     }
 
     @Override
-    public void setReservation(Integer volumeId) {
+    public Volume setReservation(Integer volumeId) {
         Optional<Volume> foundVolume = volumeRepository.findById(volumeId);
-        foundVolume.get().setReserved(true);
-        volumeRepository.save(foundVolume.get());
+
+        if (foundVolume.get().isReserved() == false) {
+            foundVolume.get().setReserved(true);
+            return volumeRepository.save(foundVolume.get());
+        } else {
+            return null;
+        }
     }
 }
