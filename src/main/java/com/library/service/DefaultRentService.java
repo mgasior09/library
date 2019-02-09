@@ -6,6 +6,7 @@ import com.library.model.Volume;
 import com.library.repository.interfaces.CustomerRepository;
 import com.library.repository.interfaces.RentRepository;
 import com.library.repository.interfaces.VolumeRepository;
+import com.library.repository.interfaces.WorkerRepository;
 import com.library.service.interfaces.RentService;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,13 @@ public class DefaultRentService implements RentService {
     private final VolumeRepository volumeRepository;
     private final CustomerRepository customerRepository;
     private final RentRepository rentRepository;
+    private final WorkerRepository workerRepository;
 
-    public DefaultRentService(VolumeRepository volumeRepository, CustomerRepository customerRepository, RentRepository rentRepository) {
+    public DefaultRentService(VolumeRepository volumeRepository, CustomerRepository customerRepository, RentRepository rentRepository, WorkerRepository workerRepository) {
         this.volumeRepository = volumeRepository;
         this.customerRepository = customerRepository;
         this.rentRepository = rentRepository;
+        this.workerRepository = workerRepository;
     }
 
     @Override
@@ -39,6 +42,7 @@ public class DefaultRentService implements RentService {
             rent.setVolume(volume);
             rent.setCustomer(foundCustomer.orElseGet(() -> customerRepository.save(customer)));
             rent.setRentDate(new Date());
+            rent.setWorker(workerRepository.findById(25).get());
             rent.setUntilDate(addDaysToDate(rent.getRentDate(), 30));
             return rentRepository.save(rent);
         }

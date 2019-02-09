@@ -11,12 +11,24 @@ public class Rent {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+    @Column(name = "date_rent")
     private Date rentDate;
     @ManyToOne
     @JoinColumn(name="volume_id")
     private Volume volume;
+    @Column(name = "intil_date")
     private Date untilDate;
+    @ManyToOne
+    @JoinColumn (name = "accepted_by_id")
+    private Worker worker;
 
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
 
     public Integer getId() {
         return id;

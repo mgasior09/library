@@ -1,8 +1,11 @@
 package com.library.controller;
 
 import com.library.model.Release;
+import com.library.model.Rent;
 import com.library.model.Volume;
+import com.library.service.interfaces.CustomerService;
 import com.library.service.interfaces.ReleaseService;
+import com.library.service.interfaces.RentService;
 import com.library.service.interfaces.VolumeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +21,14 @@ import java.util.Optional;
 public class VolumeController {
     private final ReleaseService releaseService;
     private final VolumeService volumeService;
+    private final RentService rentService;
+    private final CustomerService customerService;
 
-    public VolumeController(ReleaseService releaseService, VolumeService volumeService) {
+    public VolumeController(ReleaseService releaseService, VolumeService volumeService, RentService rentService, CustomerService customerService) {
         this.releaseService = releaseService;
         this.volumeService = volumeService;
+        this.rentService = rentService;
+        this.customerService = customerService;
     }
 
     @GetMapping("/{id}")
@@ -42,6 +49,12 @@ public class VolumeController {
     @GetMapping("/reserve/{id}")
     public String reserveById(@PathVariable("id") Integer volumeId, Model model) {
         volumeService.setReservation(volumeId);
+        return "redirect:/books";
+    }
+
+    @GetMapping("/rent/{id}")
+    public String confirmRent(@PathVariable("id") Integer volumeId, String pesel, Rent rent) {
+        rentService.rent(volumeId, customerService.getById(18).get(), rent);
         return "redirect:/books";
     }
 
