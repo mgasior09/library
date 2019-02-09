@@ -5,6 +5,7 @@
 
 </head>
 <body>
+<div align="center">
 <h1>Add book details</h1>
 <form th:action="@{/books}" method="post" th:object="${addedBook}">
     <table>
@@ -36,10 +37,10 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit"/></td>
+            <td colspan="2" align="center"><input type="submit"/></td>
         </tr>
     </table>
 </form>
-
+</div>
 </body>
 </html>

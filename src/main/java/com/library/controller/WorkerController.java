@@ -5,14 +5,12 @@ import com.library.service.interfaces.WorkerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/workers")
@@ -43,11 +41,40 @@ public class WorkerController {
             @Valid @ModelAttribute("registeredWorker") Worker worker,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addWorker";
+            return "redirect:/workers/error";
         }
-        workerService.registerWorker(worker);
-        workerService.addWorkerToUserDatabase(worker);
 
+        try {
+            workerService.registerWorker(worker);
+            workerService.addRoleToWorker(workerService.addWorkerToUserDatabase(worker));
+        } catch (RuntimeException e) {
+            return "redirect:/workers/error";
+        }
         return "redirect:/workers";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable("id") Integer workerId) {
+        workerService.deleteById(workerId);
+        return "redirect:/workers";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String initWorkerEditForm(@PathVariable("id") Integer workerId, Model model) {
+        Optional<Worker> foundWorker = workerService.getById(workerId);
+        foundWorker.ifPresent(worker -> model.addAttribute("editedWorker", worker));
+        return "editWorker";
+    }
+
+    @PostMapping("/edit")
+    public String editWorker(@ModelAttribute("editedWorker") Worker worker,
+                             @ModelAttribute("password") String password) {
+        workerService.editPassword(worker.getId(), password);
+        return "redirect:/workers";
+    }
+
+    @GetMapping("/error")
+    public String printErrorScreen() {
+        return "errorScreen";
     }
 }

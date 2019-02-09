@@ -2,24 +2,30 @@ package com.library.service;
 
         import com.library.model.Customer;
         import com.library.model.User;
+        import com.library.model.UserRole;
+        import com.library.model.Worker;
         import com.library.repository.interfaces.CustomerRepository;
         import com.library.repository.interfaces.UserRepository;
+        import com.library.repository.interfaces.UserRoleRepository;
         import com.library.service.interfaces.CustomerService;
         import org.springframework.stereotype.Service;
+        import org.springframework.transaction.annotation.Transactional;
 
         import java.util.Date;
         import java.util.List;
+        import java.util.Optional;
 
 @Service
 public class DefaultCustomerService implements CustomerService {
     private final CustomerRepository customerRepository;
     private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
 
 
-    public DefaultCustomerService(CustomerRepository customerRepository, UserRepository userRepository) {
+    public DefaultCustomerService(CustomerRepository customerRepository, UserRepository userRepository, UserRoleRepository userRoleRepository) {
         this.customerRepository = customerRepository;
-
         this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
     }
 
     @Override
@@ -74,4 +80,50 @@ public class DefaultCustomerService implements CustomerService {
         user.setActive(true);
         return userRepository.save(user);
     }
+
+    @Override
+    public UserRole addRoleToCustomer(User user) {
+        UserRole userRole = new UserRole();
+        userRole.setUser(user);
+        userRole.setRoleName("ROLE_USER");
+        return userRoleRepository.save(userRole);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        Optional<Customer> foundCustomer = customerRepository.findById(id);
+        if (foundCustomer.isPresent()) {
+            String pesel = foundCustomer.get().getPesel();
+            userRepository.deleteByUsername(pesel);
+        }
+
+        customerRepository.deleteById(id);
+    }
+
+    @Override
+    public void editCustomer(Integer id, Customer customer) {
+        Customer oldCustomer = customerRepository.findById(id).get();
+        oldCustomer.setCity(customer.getCity());
+        oldCustomer.setLastName(customer.getLastName());
+        oldCustomer.setName(customer.getName());
+        oldCustomer.setStreet(customer.getStreet());
+        oldCustomer.setZipCode(customer.getZipCode());
+
+        String password = customer.getPassword();
+        String pesel = oldCustomer.getPesel();
+        User user = userRepository.findByUsername(pesel).get();
+        user.setPassword(password);
+        oldCustomer.setPassword(password);
+        oldCustomer.setModified(new Date());
+        userRepository.save(user);
+        customerRepository.save(oldCustomer);
+    }
+
+    @Override
+    public Optional<Customer> getById(Integer workerId) {
+        return customerRepository.findById(workerId);
+    }
+
+
 }

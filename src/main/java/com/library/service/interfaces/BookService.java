@@ -1,6 +1,5 @@
 package com.library.service.interfaces;
 
-import com.library.model.Author;
 import com.library.model.Book;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.Optional;
 
 public interface BookService {
     Book addBook(Book book);
-    void editBook(Integer bookId);
+    void editBook(Integer bookId, Book book);
     void deleteById(Integer id);
 
     Optional<Book> getById(Integer bookId);
@@ -17,9 +16,15 @@ public interface BookService {
 
     Optional<Book> findByIsbn(String isbn);
 
-    List<Book> findByTitle(String title);
+    String findRoleByUserName(String userName);
 
-    List<Book> findByAuthor(Author author);
+    List<Book> findBookByAuthorAndTitle (String name, String lastName, String title);
 
-    List<Book> findByPublisher(String publisher);
+    List<Book> findBookByAuthorAndPublisher (String name, String lastName, String publisher);
+
+    List<Book> findBookByTitleAndPublisher(String title, String publisher);
+
+    List<Book> findBookByAuthorAndTitleAndPublisher (String name, String lastName, String title, String publisher);
+
+    void reserveById(Integer bookId);
 }

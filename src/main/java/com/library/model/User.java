@@ -48,4 +48,12 @@ import java.util.List;
     public void setRoles(List<String> roles) {
         this.roles = roles;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

@@ -5,14 +5,12 @@ import com.library.service.interfaces.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/customers")
@@ -43,16 +41,46 @@ public class CustomerController {
             @Valid @ModelAttribute("registeredCustomer") Customer customer,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addCustomer";
+            return "redirect:/customers/error";
         }
 
         try {
             customerService.registerCustomer(customer);
-            customerService.addCustomerToUserDatabase(customer);
-        } catch (StringIndexOutOfBoundsException e) {
-            return "redirect:/customers/add";
+            customerService.addRoleToCustomer(customerService.addCustomerToUserDatabase(customer));
+        } catch (RuntimeException e) {
+            return "redirect:/customers/error";
         }
-
         return "redirect:/customers";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable("id") Integer customerId) {
+        customerService.deleteById(customerId);
+        return "redirect:/customers";
+    }
+
+    @GetMapping("/details/{id}")
+    public String showCustomerDetails(Model model, @PathVariable("id") Integer userId) {
+        Optional<Customer> foundCustomer = customerService.getById(userId);
+        foundCustomer.ifPresent(customer -> model.addAttribute("customer", customer));
+        return "customerDetails";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String initCustomerEditForm(@PathVariable("id") Integer customerId, Model model) {
+        Optional<Customer> foundCustomer = customerService.getById(customerId);
+        foundCustomer.ifPresent(customer -> model.addAttribute("editedCustomer", customer));
+        return "editCustomer";
+    }
+
+    @PostMapping("/edit")
+    public String editCustomer(@ModelAttribute("editedCustomer") Customer customer) {
+        customerService.editCustomer(customer.getId(), customer);
+        return "redirect:/customers";
+    }
+
+    @GetMapping("/error")
+    public String printErrorScreen () {
+        return "errorScreen";
     }
 }

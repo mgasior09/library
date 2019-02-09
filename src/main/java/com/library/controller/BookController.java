@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
@@ -17,11 +18,9 @@ import java.util.Optional;
 @RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
-    private final BookRepository bookRepository;
 
-    public BookController(BookService bookService, BookRepository bookRepository) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
-        this.bookRepository = bookRepository;
     }
 
     @GetMapping("/add")
@@ -48,7 +47,7 @@ public class BookController {
 
     @PostMapping("/edit")
     public String editBook(@ModelAttribute Book book) {
-        bookService.editBook(book.getId());
+        bookService.editBook(book.getId(), book);
         return "redirect:/books";
     }
 
@@ -60,9 +59,11 @@ public class BookController {
         return "books";
     }
 
-    @GetMapping("delete/{id}")
-    public String deleteById(@PathVariable("id") Integer bookId, Model model) {
-      bookService.deleteById(bookId);
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable("id") Integer bookId) {
+        bookService.deleteById(bookId);
         return "redirect:/books";
     }
+
+
 }

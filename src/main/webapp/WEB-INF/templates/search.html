@@ -1,16 +1,45 @@
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
 <head><title>Library start page</title></head>
 <body>
-<form action="http://www.google.pl/search" method="get">
-    <input type="text" name="q">
-    <input type="hidden" name="ie" value="utf-8">
-    <select name="sitesearch">
-        <option value="/byTitle">by title</option>
-        <option value="domena">by author</option>
-        <option value="">by publishing house</option>
-        <option value="">by ISBN</option>
-    </select>
-    <input type="submit" value="Szukaj">
-</form>
+
+<div align="center">
+    <form action="/logout" style="float: right">
+        <input type="submit" value="Log out">
+    </form>
+
+    <form action="/search" style="float: right">
+        <input type="submit" value="Log in">
+    </form>
+
+    <form action="/search/notByIsbn" method="get">
+        Title:
+        <input type="text" name="title"><br>
+        Author's name and last name:
+        <input type="text" name="name">
+        <input type="text" name="lastName"><br>
+        Publisher:
+        <input type="text" name="publisher"><br>
+        <input type="submit" value="Szukaj">
+    </form>
+
+    <form action="/search/byIsbn" method="get">
+        Find by ISBN:
+        <input type="text" name="isbn"><br>
+        <input type="submit" value="Szukaj">
+    </form>
+
+
+    <form action="/workers">
+        <input type="submit" value="Employees menu">
+    </form>
+    <form action="/customers">
+        <input type="submit" value="Customers menu">
+    </form>
+    <form action="/books">
+        <input type="submit" value="Books menu">
+    </form>
+</div>
 </body>
 </html>

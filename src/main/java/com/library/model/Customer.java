@@ -1,19 +1,17 @@
 package com.library.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.xml.crypto.Data;
-import java.sql.Time;
-import java.sql.Timestamp;
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
+@Table(
+        name = "CUSTOMER",
+        uniqueConstraints =
+                @UniqueConstraint(columnNames = {"pesel"})
+)
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +25,9 @@ public class Customer {
     @NotNull
     @Pattern(regexp = "^\\d+$")
     private String pesel;
+    @NotNull
     private String city;
+    @NotNull
     private String street;
     @Column(name = "zip_code")
     private String zipCode;

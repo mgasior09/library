@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Release</title>
+    <style>
+        .fieldError {
+            border-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <h1>Add release to book"</h1>
+    <form action="#" th:action="@{/releases}" th:object="${addedRelease}" method="post">
+        <input type="hidden" th:field="*{book.id}" th:attr="name='bookId'">
+        <table>
+            <tr>
+                <td>Year</td>
+                <td>
+                    <input type="number" th:field="*{year}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td>
+                    <input type="text" th:field="*{city}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>
+                    <input type="text" th:field="*{name}" th:errorclass="fieldError"/>
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit"/></td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+</div>
+</body>
+</html>
