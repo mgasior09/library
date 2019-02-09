@@ -1,45 +1,56 @@
-<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head><title>Library start page</title></head>
 <body>
 
 <div align="center">
-    <form action="/logout" style="float: right">
-        <input type="submit" value="Log out">
-    </form>
+    <div sec:authorize="isAuthenticated()">
+        <form action="/logout" style="float: right">
+            <input type="submit" value="Log out">
+        </form>
+    </div>
 
-    <form action="/search" style="float: right">
-        <input type="submit" value="Log in">
-    </form>
+    <div sec:authorize="!isAuthenticated()">
+        <form action="/search" style="float: right">
+            <input type="submit" value="Log in">
+        </form>
+    </div>
+    <br/>
+    <h1>LIBRARY</h1>
 
-    <form action="/search/notByIsbn" method="get">
+    <form action="/search/notByIsbn" method="get" align="center">
         Title:
-        <input type="text" name="title"><br>
+        <input type="text" name="title">
         Author's name and last name:
         <input type="text" name="name">
-        <input type="text" name="lastName"><br>
+        <input type="text" name="lastName">
         Publisher:
-        <input type="text" name="publisher"><br>
+        <input type="text" name="publisher"><br/>
+        (To search, please fill in at least two fields)<br/>
         <input type="submit" value="Szukaj">
-    </form>
+    </form><br/>
+
 
     <form action="/search/byIsbn" method="get">
         Find by ISBN:
-        <input type="text" name="isbn"><br>
+        <input type="text" name="isbn"><br/>
         <input type="submit" value="Szukaj">
-    </form>
+    </form><br/>
 
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <form action="/workers">
+            <input type="submit" value="Employees menu">
+        </form>
+    </div>
 
-    <form action="/workers">
-        <input type="submit" value="Employees menu">
-    </form>
-    <form action="/customers">
-        <input type="submit" value="Customers menu">
-    </form>
-    <form action="/books">
-        <input type="submit" value="Books menu">
-    </form>
+    <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')">
+        <form action="/customers">
+            <input type="submit" value="Customers menu">
+        </form>
+        <form action="/books">
+            <input type="submit" value="Books menu">
+        </form>
+    </div>
 </div>
 </body>
 </html>
