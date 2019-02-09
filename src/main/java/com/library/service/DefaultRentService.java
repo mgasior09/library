@@ -27,7 +27,7 @@ public class DefaultRentService implements RentService {
     }
 
     @Override
-    public Rent rent(Integer volumeId, Customer customer) {
+    public Rent rent(Integer volumeId, Customer customer, Rent rent) {
         Optional<Volume> optionalVolume = volumeRepository.findById(volumeId);
         if (!optionalVolume.isPresent()) {
             return null;
@@ -36,7 +36,6 @@ public class DefaultRentService implements RentService {
             volume.setRented(true);
             volumeRepository.save(volume);
             Optional<Customer> foundCustomer = customerRepository.findById(customer.getId());
-            Rent rent = new Rent();
             rent.setVolume(volume);
             rent.setCustomer(foundCustomer.orElseGet(() -> customerRepository.save(customer)));
             rent.setRentDate(new Date());

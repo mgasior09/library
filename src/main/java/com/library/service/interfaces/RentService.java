@@ -6,7 +6,7 @@ import com.library.model.Rent;
 import java.util.List;
 
 public interface RentService {
-    Rent rent(Integer bookId, Customer customer);
+    Rent rent(Integer bookId, Customer customer, Rent rent);
 
     List<Rent> getAllCustomerRents (String pesel);
 

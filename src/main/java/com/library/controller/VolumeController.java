@@ -32,22 +32,16 @@ public class VolumeController {
     }
 
 
-
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable("id") Integer volumeId) {
         volumeService.deleteById(volumeId);
         return "redirect:/books";
     }
 
-    @PostMapping("/reserve/")
-    public String reserveById( @ModelAttribute Integer volumeId) {
-        volumeService.setReservation(volumeId);
-        return "redirect:/books";
-    }
 
     @GetMapping("/reserve/{id}")
-    public String initFormReserveById(@PathVariable("id") Integer volumeId, Model model) {
-        model.addAttribute("reservedId",volumeId );
+    public String reserveById(@PathVariable("id") Integer volumeId, Model model) {
+        volumeService.setReservation(volumeId);
         return "redirect:/books";
     }
 
@@ -61,7 +55,7 @@ public class VolumeController {
         return "addVolume";
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public String addRelease(@Valid @ModelAttribute("addedVolume") Volume volume, BindingResult br) {
         if (br.hasErrors()) {
             return "addVolume";

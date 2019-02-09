@@ -20,6 +20,7 @@
                 <th>Modified</th>
                 <th>Reserved</th>
                 <th>Reservation</th>
+                <th>Confirm rent</th>
                 <th>Delete</th>
             </tr>
             <tr th:each="volume : ${volumesList}" th:object="${volume}">
@@ -29,8 +30,10 @@
                 <td th:text="*{added}"/>
                 <td th:text="*{modified}"/>
                 <td th:text="*{reserved}"/>
-                <td><a th:href="@{/reserve/{volumeId}(volumeId=*{id})}"
+                <td><a th:href="@{reserve/{volumeId}(volumeId=*{id})}"
                        th:text="Reserve"/></td>
+                <td><a th:href="@{rent/{volumeId}(volumeId=*{id})}"
+                       th:text="Rent"/></td>
                 <td><a th:href="@{delete/{volumeId}(volumeId=*{id})}"
                        th:text="Delete"/></td>
             </tr>
